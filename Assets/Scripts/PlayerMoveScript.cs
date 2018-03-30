@@ -10,6 +10,9 @@ public class PlayerMoveScript : MonoBehaviour {
 	Rigidbody2D rb;
 	Animator	anim;
 
+	WeaponScript weaponInventory = null;
+	public GameObject	bullet;
+	float fireWait = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -44,5 +47,51 @@ public class PlayerMoveScript : MonoBehaviour {
 			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 		}
+		fireWait -= Time.deltaTime;
+		if (fireWait < 0)
+			fireWait = 0;
+		if (Input.GetMouseButton (0) && weaponInventory) {
+			if (fireWait <= 0 && weaponInventory.bulletNumber > 0) {
+				fireWait = weaponInventory.timeToShot;
+				Vector3 newPos = transform.position;
+				Vector2 lookDirNorm = lookDir.normalized;
+				newPos.x += lookDirNorm.x * 0.75f;
+				newPos.y += lookDirNorm.y * 0.75f;
+				GameObject newBullet;
+				if (lookDir != Vector2.zero) {
+					float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+					newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
+				}
+				else
+					newBullet = GameObject.Instantiate (bullet, newPos, transform.rotation);
+				newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
+				BulletScript bs = newBullet.GetComponent<BulletScript> ();
+				bs.dir = lookDir.normalized;
+				bs.speed = weaponInventory.bulletSpeed;
+				bs.origin = gameObject;
+				weaponInventory.bulletNumber -= 1;
+			}
+		}
+		if (Input.GetMouseButtonDown (1)) {
+			dropWeapon ();
+		}
+	}
+
+	public void pickWeapon(WeaponScript weapon) {
+		if (weaponInventory)
+			return;
+		weaponInventory = weapon;
+		weaponInventory.gameObject.SetActive (false);
+		weaponSlot.SetActive (true);
+		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+	}
+
+	public void dropWeapon() {
+		if (!weaponInventory)
+			return;
+		weaponInventory.gameObject.SetActive (true);
+		weaponInventory.gameObject.transform.position = transform.position;
+		weaponInventory = null;
+		weaponSlot.SetActive (false);
 	}
 }

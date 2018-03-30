@@ -199,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSlot: {fileID: 1021269829904088}
   speed: 5
+  bullet: {fileID: 1885178431705906, guid: 3ca8fe946a8a94de08c7a66f6ee2eaa0, type: 2}
 --- !u!212 &212070009483145156
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -229,7 +230,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1274651121
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 43a139c7bee644f6f96d3ce30cc7cc15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -271,7 +272,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1274651121
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: a7505dd4d65a44efd84567e52dce71fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -313,7 +314,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1274651121
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7484b4fcae9dc4428b0a04538254a985, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -355,7 +356,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1274651121
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: c536abfeb14f64138a37e32b716076ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
