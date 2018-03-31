@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28bd392b6cb945cc98838d9b77b5fd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: 
   weaponSprite: {fileID: 21300000, guid: 3a582ad63bf63437ca436507f3c5fbe8, type: 3}
   weaponSlotSprite: {fileID: 21300000, guid: 43a139c7bee644f6f96d3ce30cc7cc15, type: 3}
   bulletSprite: {fileID: 21300000, guid: 4b5fba961acb6452aaabf2a6f96856a1, type: 3}
@@ -89,6 +90,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26434010a2e2948999d2f96e33221e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponsName:
+  - Uzi
+  - Shotgun
+  - Magnum
+  - Rocket Launcher
+  - Katana
+  - Cricket
+  - Pistol
+  - Sub Machine Gun
+  - Machine Gun
+  - Energy Pistol
+  - Sniper
+  - Hadoken
   weaponSprites:
   - {fileID: 21300000, guid: 3a582ad63bf63437ca436507f3c5fbe8, type: 3}
   - {fileID: 21300000, guid: b99032e6f1f9a49e5adb932489c76376, type: 3}

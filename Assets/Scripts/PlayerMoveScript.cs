@@ -125,4 +125,9 @@ public class PlayerMoveScript : MonoBehaviour {
 		weaponInventory = null;
 		weaponSlot.SetActive (false);
 	}
+
+	public WeaponScript getPlayerWeapon()
+	{
+		return (weaponInventory);
+	}
 }
