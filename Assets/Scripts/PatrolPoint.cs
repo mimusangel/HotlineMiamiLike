@@ -8,11 +8,11 @@ public class PatrolPoint : MonoBehaviour {
 	public float randomRadius;
 
 	void OnDrawGizmos() {
+		Gizmos.color = Color.blue;
 		Gizmos.DrawIcon(transform.position, "arrow.png", true);
-		if (nextPoint != null) {
-			Gizmos.color = Color.blue;
+		Gizmos.DrawWireSphere(transform.position, randomRadius);
+		if (nextPoint) {
 			Gizmos.DrawLine(transform.position, nextPoint.transform.position);
-			Gizmos.DrawWireSphere(transform.position, randomRadius);
 		}
 	}
 }

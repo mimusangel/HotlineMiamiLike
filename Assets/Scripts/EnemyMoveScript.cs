@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class EnemyMoveScript : MonoBehaviour {
 
-	public GameObject playerChar;
 	public float moveSpeed;
 	public PatrolPoint startPatrolPoint;
 	public float patrolWaitingTime;
 	public bool patrolRandom;
+	public float sightRadius;
+	public float sightAngle;
+	public SpriteRenderer alertedIcon;
 
 	// private values
 
+	private enum AlertState {
+		idlePatrol,
+		checkNoise,
+		attack
+	}
+	private AlertState alertState;
 	private bool stunned;
 	private float stunnedTime;
+
+	// idlePatrol case
 	private int patrolIndex;
 	private Vector2 targetPoint;
 	private float lastMoveTime;
@@ -21,14 +31,47 @@ public class EnemyMoveScript : MonoBehaviour {
 	private List<Vector2> patrolPoints;
 	private List<float> patrolRandomWanderingRadius;
 
+	// checkingNoise case
+	private Vector2 checkingNoisePosition;
+	private List<Vector2> pathPositions; // always go to the first then remove it
+	private float checkingWaitTime;
+
+	// attack case
+	private Vector2 lastPlayerSeenPosition;
+	private float shootCooldown;
+
 	// Component ShortCuts
+	private GameObject playerChar;
 	private Animator animatorComponent;
 	private Rigidbody2D bodyComponent;
 
+	void OnDrawGizmos() {
+		float lookDirection = (transform.eulerAngles.z - 90) * Mathf.Deg2Rad;
+		Vector2 farPointLeft = transform.position;
+		farPointLeft.x += Mathf.Cos(lookDirection - 0.5f * Mathf.Deg2Rad * sightAngle) * sightRadius;
+		farPointLeft.y += Mathf.Sin(lookDirection - 0.5f * Mathf.Deg2Rad * sightAngle) * sightRadius;
+		Vector2 farPointRight = transform.position;
+		farPointRight.x += Mathf.Cos(lookDirection + 0.5f * Mathf.Deg2Rad * sightAngle) * sightRadius;
+		farPointRight.y += Mathf.Sin(lookDirection + 0.5f * Mathf.Deg2Rad * sightAngle) * sightRadius;
+		Gizmos.color = Color.red;
+		Gizmos.DrawLine(transform.position, farPointLeft);
+		Gizmos.DrawLine(transform.position, farPointRight);
+
+		for (float i = -0.5f; i < 0.4f; i += 0.1f) {
+			farPointLeft = transform.position;
+			farPointLeft.x += Mathf.Cos(lookDirection + i * Mathf.Deg2Rad * sightAngle) * sightRadius;
+			farPointLeft.y += Mathf.Sin(lookDirection + i * Mathf.Deg2Rad * sightAngle) * sightRadius;
+			farPointRight = transform.position;
+			farPointRight.x += Mathf.Cos(lookDirection + (i + 0.1f) * Mathf.Deg2Rad * sightAngle) * sightRadius;
+			farPointRight.y += Mathf.Sin(lookDirection + (i + 0.1f) * Mathf.Deg2Rad * sightAngle) * sightRadius;
+			Gizmos.DrawLine(farPointLeft, farPointRight);
+		}
+	}
+
 	// Use this for initialization
 	void Start () {
-
 		// private values inits
+		alertState = AlertState.idlePatrol;
 		stunned = false;
 		patrolIndex = 0;
 		targetPoint = gameObject.transform.position;
@@ -44,38 +87,96 @@ public class EnemyMoveScript : MonoBehaviour {
 				point = point.nextPoint;
 			} while (point != startPatrolPoint && point != null);
 		}
+		pathPositions = new List<Vector2>();
+		checkingWaitTime = 0.0f;
+		shootCooldown = 0.0f;
 
 		// Component ShortCuts inits
+		playerChar = GameObject.FindGameObjectWithTag("Player");
 		animatorComponent = GetComponent<Animator>();
 		bodyComponent = GetComponent<Rigidbody2D>();
+
+		SetState(alertState);
 	}
 
-	// Update is called once per frame
 	void Update () {
-
-		if (Input.GetKeyDown("a")) {
-			SetStunned(true, 1.0f);
+		if (Input.GetMouseButtonDown(1)) {
+			Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			NoiseListener(worldPos, 2.0f);
 		}
-
+		alertedIcon.transform.position = transform.position + new Vector3(0, 1, 0);
+		alertedIcon.transform.rotation = Quaternion.identity;
 		if (stunned) {
 			stunnedTime -= Time.deltaTime;
 			if (stunnedTime <= 0.0f)
 				SetStunned(false);
-		} else
+		} else {
 			UpdateMove();
+			if (alertState != AlertState.attack && CanSeePosition(playerChar.transform.position)) {
+				SetState(AlertState.attack);
+			}
+		}
 	}
 
 	void UpdateMove() {
-		if (currentlyMoving) {
-			Vector2 dir = targetPoint - (Vector2)gameObject.transform.position;
-			transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-			if (dir.magnitude < 0.2f) {
-				currentlyMoving = false;
-				lastMoveTime = Time.time;
-			}
-			dir.Normalize();
-			bodyComponent.velocity = dir * moveSpeed;
-			animatorComponent.SetBool("run", true);
+		switch (alertState) {
+			case AlertState.idlePatrol:
+				UpdatePatrolMove();
+				break;
+			case AlertState.checkNoise:
+				if (pathPositions.Count > 0)
+					UpdatePatrolMove();
+				else {
+					checkingWaitTime -= Time.deltaTime;
+					bodyComponent.velocity = Vector2.zero;
+					bodyComponent.angularVelocity = 0.0f;
+					if (checkingWaitTime <= 0.0f)
+						SetState(AlertState.idlePatrol);
+				}
+				break;
+			case AlertState.attack:
+				if (CanSeePosition(playerChar.transform.position))
+					UpdateAttackPlayer();
+				else {
+					checkingNoisePosition = lastPlayerSeenPosition;
+					SetState(AlertState.checkNoise);
+				}
+				break;
+		}
+	}
+
+	void UpdateAttackPlayer() {
+		lastPlayerSeenPosition = playerChar.transform.position;
+		bodyComponent.velocity = Vector2.zero;
+		bodyComponent.angularVelocity = 0.0f;
+		Vector2 dir = lastPlayerSeenPosition - (Vector2)gameObject.transform.position;
+		transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+		shootCooldown -= Time.deltaTime;
+		if (shootCooldown <= 0.0f) {
+			// TODO: shoot
+			shootCooldown = 1.0f;
+		}
+	}
+
+	void UpdateMoveToward(Vector2 walkTargetPoint) {
+		Vector2 dir = walkTargetPoint - (Vector2)gameObject.transform.position;
+		transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+		if (dir.magnitude < 0.2f) {
+			currentlyMoving = false;
+			lastMoveTime = Time.time;
+		}
+		dir.Normalize();
+		bodyComponent.velocity = dir * moveSpeed;
+		animatorComponent.SetBool("run", true);
+	}
+
+	void UpdatePatrolMove() {
+		if (pathPositions.Count > 0) {
+			UpdateMoveToward(pathPositions[0]);
+			if (Vector2.Distance((Vector2)gameObject.transform.position, pathPositions[0]) < 0.5f)
+				pathPositions.RemoveAt(0);
+		} else if (currentlyMoving) {
+			UpdateMoveToward(targetPoint);
 		} else {
 			bodyComponent.angularVelocity = 0;
 			bodyComponent.velocity = Vector2.zero;
@@ -99,13 +200,62 @@ public class EnemyMoveScript : MonoBehaviour {
 		}
 	}
 
-	void NoiseListener(Vector2 noisePosition, float noiseRange) {
-		if (Vector2.Distance(transform.position, noisePosition) <= noiseRange) {
-			Debug.Log("noise heard");
+	private void SetState(AlertState newState) {
+		switch (newState) {
+			case AlertState.idlePatrol:
+				if (alertState != AlertState.idlePatrol) {
+					// TODO: pathPositions = pathfinding to targetPoint
+					pathPositions.Clear();
+				}
+				alertedIcon.transform.localScale = new Vector3(0, 0, 0);
+				break;
+			case AlertState.checkNoise:
+				pathPositions.Clear();
+				// TODO: pathPositions = pathfinding to checkingNoisePosition
+				pathPositions.Add(checkingNoisePosition);
+				alertedIcon.color = Color.yellow;
+				BumpAlertedIcon();
+				checkingWaitTime = 4.0f;
+				break;
+			case AlertState.attack:
+				if (alertState != AlertState.attack) {
+					alertedIcon.color = Color.red;
+					BumpAlertedIcon();
+				}
+				break;
 		}
+		alertState = newState;
 	}
 
-	void SetStunned(bool s, float time = 0) {
+	public bool CanSeePosition(Vector2 position) {
+		Vector2 selfPos = transform.position;
+		if (Vector2.Distance(selfPos, position) > sightRadius)
+			return false;
+		float lookDirection = (transform.eulerAngles.z - 90) * Mathf.Deg2Rad;
+		Vector2 farPoint = selfPos;
+		farPoint.x += Mathf.Cos(lookDirection);
+		farPoint.y += Mathf.Sin(lookDirection);
+		float angle = Vector2.Angle(selfPos - farPoint, selfPos - position);
+		if (angle > sightAngle / 2)
+			return false;
+		Vector2 direction = position - selfPos;
+		RaycastHit2D[] hits = Physics2D.RaycastAll(selfPos, direction.normalized, direction.magnitude);
+		foreach (RaycastHit2D hit in hits) {
+			if (hit.collider.gameObject.tag == "Map")
+				return false;
+		}
+		return true;
+	}
+
+	public void NoiseListener(Vector2 noisePosition, float noiseRange) {
+		if (alertState != AlertState.attack)
+			if (Vector2.Distance(transform.position, noisePosition) <= noiseRange) {
+				checkingNoisePosition = noisePosition;
+				SetState(AlertState.checkNoise);
+			}
+	}
+
+	public void SetStunned(bool s, float time = 0) {
 		stunned = s;
 		if (s) {
 			bodyComponent.velocity = new Vector2(0, 0);
@@ -115,6 +265,21 @@ public class EnemyMoveScript : MonoBehaviour {
 			bodyComponent.velocity = new Vector2(0, 0);
 			bodyComponent.angularVelocity = 0.0f;
 		}
+	}
+
+	public void BumpAlertedIcon() {
+		StartCoroutine(bumpAlertedIconRoutine());
+	}
+
+	private IEnumerator bumpAlertedIconRoutine() {
+		for (float i = 0; i < 3.0f; i += 0.07f) {
+			float s = -12.0f * i * i + 7.0f * i + 1;
+			if (s < 1.0f)
+				s = 1.0f;
+			alertedIcon.transform.localScale = new Vector3(s, s, 1);
+			yield return new WaitForSeconds(0.025f);
+		}
+		alertedIcon.transform.localScale = new Vector3(0, 0, 1);
 	}
 
 }
