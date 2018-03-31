@@ -12,6 +12,7 @@ public class PatrolPoint : MonoBehaviour {
 		if (nextPoint != null) {
 			Gizmos.color = Color.blue;
 			Gizmos.DrawLine(transform.position, nextPoint.transform.position);
+			Gizmos.DrawWireSphere(transform.position, randomRadius);
 		}
 	}
 }

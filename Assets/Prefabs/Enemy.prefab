@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114413253930230168}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,6 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 248240baaf00447f1b81724fe5e151b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerChar: {fileID: 0}
+  moveSpeed: 0
+  startPatrolPoint: {fileID: 0}
+  patrolWaitingTime: 0
+  patrolRandom: 0
 --- !u!212 &212159539569628560
 SpriteRenderer:
   m_ObjectHideFlags: 1

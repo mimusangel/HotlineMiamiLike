@@ -4,29 +4,47 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class buttonScript : MonoBehaviour {
-	// Use this for initialization
 
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public GameObject[]				menus;
+	int								iMenu = 0;
+
+	public UnityEngine.UI.Slider	musicSlider;
+	public UnityEngine.UI.Slider	soundsSlider;
+	public AudioSource				audioSource;
+
+	void Update()
+	{
 	}
+
 	public void play()
 	{
-		// Destroy(audioSource);
 		SceneManager.LoadScene("Scenes/Level1");
 	}
-
 	public void exit()
 	{
 		Application.Quit();
 	}
-	public void toMainMenu()
+	public void toMenu(int i)
 	{
-		SceneManager.LoadScene("Scenes/MainMenu");
+		if (menus.Length > i)
+		{
+			menus[iMenu].SetActive(false);
+			iMenu = i;
+			menus[i].SetActive(true);
+		}
 	}
-	public void toOptionMenu()
+	public void musicVolume()
 	{
-		SceneManager.LoadScene("Scenes/OptionMenu");
+		if (menus.Length > 0)
+		{
+			PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
+			PlayerPrefs.Save();
+			audioSource.volume = PlayerPrefs.GetFloat("musicVolume");
+		}
+	}
+	public void soundsVolume()
+	{
+		PlayerPrefs.SetFloat("soundsVolume", soundsSlider.value);
+		PlayerPrefs.Save();
 	}
 }
