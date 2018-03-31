@@ -803,11 +803,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 21
       objectReference: {fileID: 0}
-    - target: {fileID: 114790551229320574, guid: 675f0450ea40749bdafb97bab5c5e1b7,
-        type: 2}
-      propertyPath: bulletTypes.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 675f0450ea40749bdafb97bab5c5e1b7, type: 2}
   m_IsPrefabParent: 0
