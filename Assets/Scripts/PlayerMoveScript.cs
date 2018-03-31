@@ -55,13 +55,10 @@ public class PlayerMoveScript : MonoBehaviour {
 			if (fireWait <= 0) {
 				fireWait = weaponInventory.timeToShot;
 				if (weaponInventory.weaponType == WeaponScript.Type.Dist) {
-					if (weaponInventory.bulletNumber > 0)
-					{
-						if (weaponInventory.bulletUsedByShot > 1)
+					if (weaponInventory.bulletUsedByShot > 1)
 							StartCoroutine(weaponShotRate(lookDir));
 						else
 							weaponShot(lookDir, 1);
-					}
 				} else {
 					weaponShot(lookDir, 0);
 				}
@@ -82,6 +79,11 @@ public class PlayerMoveScript : MonoBehaviour {
 	}
 	private void weaponShot(Vector2 lookDir, int useMun)
 	{
+		if (weaponInventory.bulletNumber <= 0 && weaponInventory.weaponType == WeaponScript.Type.Dist)
+		{
+			GetComponent<AudioSource>().Play();
+			return;
+		}
 		Vector3 newPos = transform.position;
 		Vector2 lookDirNorm = lookDir.normalized;
 		newPos.x += lookDirNorm.x * 0.75f;
@@ -99,6 +101,9 @@ public class PlayerMoveScript : MonoBehaviour {
 		bs.speed = weaponInventory.bulletSpeed;
 		bs.origin = gameObject;
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
+		AudioSource audio = newBullet.GetComponent<AudioSource>();
+		audio.clip = weaponInventory.weaponShotSound;
+		audio.Play();
 		weaponInventory.bulletNumber -= useMun;
 	}
 
