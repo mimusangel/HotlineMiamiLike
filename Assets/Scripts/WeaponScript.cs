@@ -66,12 +66,13 @@ public class WeaponScript : MonoBehaviour {
 		if (other.gameObject.tag == "Enemy") {
 			if (weaponType == Type.Katana) {
 				// Tuer l'enemy
-				Destroy(other.gameObject);
+				other.gameObject.GetComponent<DeathScript>().Death();
 				rb2d.velocity = Vector2.zero;
 			}
 			else
 			{
 				// Etourdir l'enemy
+				// other.gameObject.GetComponent<EnemyMoveScript>().SetS
 			}
 		}
 	}
