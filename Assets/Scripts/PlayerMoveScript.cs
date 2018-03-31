@@ -52,30 +52,54 @@ public class PlayerMoveScript : MonoBehaviour {
 		if (fireWait < 0)
 			fireWait = 0;
 		if (Input.GetMouseButton (0) && weaponInventory) {
-			if (fireWait <= 0 && weaponInventory.bulletNumber > 0) {
+			if (fireWait <= 0) {
 				fireWait = weaponInventory.timeToShot;
-				Vector3 newPos = transform.position;
-				Vector2 lookDirNorm = lookDir.normalized;
-				newPos.x += lookDirNorm.x * 0.75f;
-				newPos.y += lookDirNorm.y * 0.75f;
-				GameObject newBullet;
-				if (lookDir != Vector2.zero) {
-					float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-					newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
+				if (weaponInventory.weaponType == WeaponScript.Type.Dist) {
+					if (weaponInventory.bulletNumber > 0)
+					{
+						if (weaponInventory.bulletUsedByShot > 1)
+							StartCoroutine(weaponShotRate(lookDir));
+						else
+							weaponShot(lookDir, 1);
+					}
+				} else {
+					weaponShot(lookDir, 0);
 				}
-				else
-					newBullet = GameObject.Instantiate (bullet, newPos, transform.rotation);
-				newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
-				BulletScript bs = newBullet.GetComponent<BulletScript> ();
-				bs.dir = lookDir.normalized;
-				bs.speed = weaponInventory.bulletSpeed;
-				bs.origin = gameObject;
-				weaponInventory.bulletNumber -= 1;
 			}
 		}
 		if (Input.GetMouseButtonDown (1)) {
 			dropWeapon ();
 		}
+	}
+
+	IEnumerator weaponShotRate(Vector2 lookDir)
+	{
+		for (int i = 0; i < weaponInventory.bulletUsedByShot; i++)
+		{
+			weaponShot(lookDir, 1);
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
+	private void weaponShot(Vector2 lookDir, int useMun)
+	{
+		Vector3 newPos = transform.position;
+		Vector2 lookDirNorm = lookDir.normalized;
+		newPos.x += lookDirNorm.x * 0.75f;
+		newPos.y += lookDirNorm.y * 0.75f;
+		GameObject newBullet;
+		if (lookDir != Vector2.zero) {
+			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+			newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
+		}
+		else
+			newBullet = GameObject.Instantiate (bullet, newPos, transform.rotation);
+		newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
+		BulletScript bs = newBullet.GetComponent<BulletScript> ();
+		bs.dir = lookDir.normalized;
+		bs.speed = weaponInventory.bulletSpeed;
+		bs.origin = gameObject;
+		bs.setLifeTime(weaponInventory.bulletLifeTime);
+		weaponInventory.bulletNumber -= useMun;
 	}
 
 	public void pickWeapon(WeaponScript weapon) {

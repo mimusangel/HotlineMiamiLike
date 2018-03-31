@@ -12,6 +12,7 @@ public class WeaponRandomScript : MonoBehaviour {
 	public float[]				timeToShots;
 	public int[]				bulletUsedByShots;
 	public float[]				bulletsSpeed;
+	public float[]				bulletsLifeTime;
 
 	void Start () {
 		int id = Random.Range (0, weaponSprites.Length);
@@ -24,6 +25,7 @@ public class WeaponRandomScript : MonoBehaviour {
 		ws.timeToShot = timeToShots[id];
 		ws.bulletUsedByShot = bulletUsedByShots[id];
 		ws.bulletSpeed = bulletsSpeed [id];
+		ws.bulletLifeTime = bulletsLifeTime[id];
 		GetComponent<SpriteRenderer> ().sprite = weaponSprites [id];
 	}
 }

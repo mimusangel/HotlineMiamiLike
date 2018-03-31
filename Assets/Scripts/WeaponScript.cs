@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour {
 
-	public enum Type {CaC, Dist};
+	public enum Type {Dist, Katana, Hadoken};
 
 	public Sprite	weaponSprite;
 	public Sprite	weaponSlotSprite;
@@ -14,6 +14,7 @@ public class WeaponScript : MonoBehaviour {
 	public float	timeToShot = 0.25f;
 	public int		bulletUsedByShot = 1;
 	public float	bulletSpeed = 10.0f;
+	public float	bulletLifeTime = 10.0f;
 
 	GameObject player;
 	
