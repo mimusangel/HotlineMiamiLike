@@ -8,14 +8,16 @@ public class buttonScript : MonoBehaviour {
 	public GameObject[]				menus;
 	int								iMenu = 0;
 
-	public UnityEngine.UI.Slider	musicSlider;
-	public UnityEngine.UI.Slider	soundsSlider;
+	public UnityEngine.UI.Slider	musicSlider = null;
+	public UnityEngine.UI.Slider	soundsSlider = null;
 	public AudioSource				audioSource;
 
 	void Start()
 	{
-		musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-		soundsSlider.value = PlayerPrefs.GetFloat("soundsVolume");
+		if (musicSlider)
+			musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+		if (soundsSlider)
+			soundsSlider.value = PlayerPrefs.GetFloat("soundsVolume");
 	}
 	public void play()
 	{

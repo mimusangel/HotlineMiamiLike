@@ -269,6 +269,46 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 225610044}
+    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 284.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -39.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 284.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -119.850006
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f585c4f96a4544223a28d6da23fa66b3, type: 2}
   m_IsPrefabParent: 0
@@ -762,6 +802,11 @@ Prefab:
     - target: {fileID: 4845148883270286, guid: 675f0450ea40749bdafb97bab5c5e1b7, type: 2}
       propertyPath: m_RootOrder
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114790551229320574, guid: 675f0450ea40749bdafb97bab5c5e1b7,
+        type: 2}
+      propertyPath: bulletTypes.Array.data[1]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 675f0450ea40749bdafb97bab5c5e1b7, type: 2}

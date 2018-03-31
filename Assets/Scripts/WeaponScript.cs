@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour {
 
 	public enum Type {Dist, Katana, Hadoken};
-	public enum BulletType {Base, Laser, Explode};
+	public enum BulletType {Base, Laser, Explode, Fragment};
 	public string	weaponName;
 	public Sprite	weaponSprite;
 	public Sprite	weaponSlotSprite;
@@ -56,6 +56,7 @@ public class WeaponScript : MonoBehaviour {
 			}
 			if (rb2d.velocity.magnitude < 0.5f)
 				rb2d.velocity = Vector2.zero;
+				rotateSpeed = 0;
 		}
 	}
 	
