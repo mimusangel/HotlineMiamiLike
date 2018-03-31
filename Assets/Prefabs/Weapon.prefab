@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1238561940568582}
   m_IsPrefabParent: 1
+--- !u!1 &1034214562190026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4252712714279850}
+  - component: {fileID: 58707803695241832}
+  m_Layer: 12
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1238561940568582
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,6 +39,7 @@ GameObject:
   - component: {fileID: 58236756858382966}
   - component: {fileID: 114515855717206102}
   - component: {fileID: 114790551229320574}
+  - component: {fileID: 50505747852720228}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -30,6 +47,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4252712714279850
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034214562190026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4845148883270286}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4845148883270286
 Transform:
   m_ObjectHideFlags: 1
@@ -39,10 +69,31 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5068684, y: -1.0065625, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4252712714279850}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50505747852720228
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1238561940568582}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!58 &58236756858382966
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -58,6 +109,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!58 &58707803695241832
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034214562190026}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!114 &114515855717206102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,6 +145,9 @@ MonoBehaviour:
   bulletUsedByShot: 0
   bulletSpeed: 0
   bulletLifeTime: 10
+  shotSoundRange: 5
+  weaponFriction: 0.8
+  weaponShotSound: {fileID: 0}
 --- !u!114 &114790551229320574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,44 +215,83 @@ MonoBehaviour:
   bulletNumbers: 280000000c0000000600000005000000000000000e000000100000002000000064000000140000000a00000000000000
   timeToShots:
   - 0.75
+  - 1
+  - 1
+  - 1.5
   - 0.25
   - 0.25
   - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
-  - 0.25
+  - 0.15
+  - 0.1
+  - 0.75
+  - 1.5
+  - 0.4
   bulletUsedByShots: 030000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   bulletsSpeed:
   - 10
+  - 8
   - 10
-  - 10
-  - 10
+  - 7
   - 0
+  - 11
+  - 8
   - 10
   - 10
-  - 10
-  - 10
-  - 10
-  - 10
+  - 12
+  - 14
   - 6
   bulletsLifeTime:
-  - 10
-  - 10
-  - 10
-  - 10
+  - 4
+  - 2
+  - 4
+  - 6
   - 0.1
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
+  - 5
+  - 3
+  - 4
+  - 4
+  - 5
+  - 8
   - 0.5
+  shotSoundRanges:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 1
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 1
+  weaponFrictions:
+  - 0.85
+  - 0.85
+  - 0.85
+  - 0.75
+  - 0.9
+  - 0.85
+  - 0.85
+  - 0.8
+  - 0.8
+  - 0.85
+  - 0.85
+  - 0.85
+  weaponShotSounds:
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: 8a7150a27201b41f4a7bbd616c8a042b, type: 3}
+  - {fileID: 8300000, guid: f1a817d0c36714d52b4d0b9134052a31, type: 3}
+  - {fileID: 8300000, guid: d27266dbeb98e4717a95f991054745c7, type: 3}
+  - {fileID: 8300000, guid: 48d68d12751aa44cb87bfa4f2ca98bb6, type: 3}
+  - {fileID: 8300000, guid: 41ba8b787dda34228adbcfeae0635a4c, type: 3}
+  - {fileID: 8300000, guid: f1a817d0c36714d52b4d0b9134052a31, type: 3}
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: a634b485d3ffc44c7b52cab228a8ce8e, type: 3}
+  - {fileID: 8300000, guid: 7db6db13cd0db47f8a7ec51faf507fe1, type: 3}
+  - {fileID: 8300000, guid: bc2f9fa344b7e4fc4980b4e30e33cb08, type: 3}
 --- !u!212 &212138084053286694
 SpriteRenderer:
   m_ObjectHideFlags: 1

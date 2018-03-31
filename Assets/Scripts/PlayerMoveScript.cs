@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoveScript : MonoBehaviour {
 
 	public GameObject weaponSlot;
+	public GameObject weaponSound;
 	public float speed = 5.0f;
 
 	Rigidbody2D rb;
@@ -55,13 +56,10 @@ public class PlayerMoveScript : MonoBehaviour {
 			if (fireWait <= 0) {
 				fireWait = weaponInventory.timeToShot;
 				if (weaponInventory.weaponType == WeaponScript.Type.Dist) {
-					if (weaponInventory.bulletNumber > 0)
-					{
-						if (weaponInventory.bulletUsedByShot > 1)
+					if (weaponInventory.bulletUsedByShot > 1)
 							StartCoroutine(weaponShotRate(lookDir));
 						else
 							weaponShot(lookDir, 1);
-					}
 				} else {
 					weaponShot(lookDir, 0);
 				}
@@ -76,29 +74,38 @@ public class PlayerMoveScript : MonoBehaviour {
 	{
 		for (int i = 0; i < weaponInventory.bulletUsedByShot; i++)
 		{
-			weaponShot(lookDir, 1);
+			if (weaponInventory)
+				weaponShot(lookDir, 1);
 			yield return new WaitForSeconds(0.1f);
 		}
 	}
 	private void weaponShot(Vector2 lookDir, int useMun)
 	{
+		if (weaponInventory.bulletNumber <= 0 && weaponInventory.weaponType == WeaponScript.Type.Dist)
+		{
+			GetComponent<AudioSource>().Play();
+			return;
+		}
 		Vector3 newPos = transform.position;
 		Vector2 lookDirNorm = lookDir.normalized;
-		newPos.x += lookDirNorm.x * 0.75f;
-		newPos.y += lookDirNorm.y * 0.75f;
+		newPos.x += lookDirNorm.x * 0.5f;
+		newPos.y += lookDirNorm.y * 0.5f;
 		GameObject newBullet;
-		if (lookDir != Vector2.zero) {
-			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-			newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
-		}
-		else
-			newBullet = GameObject.Instantiate (bullet, newPos, transform.rotation);
+		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+		newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
 		newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
 		BulletScript bs = newBullet.GetComponent<BulletScript> ();
 		bs.dir = lookDir.normalized;
 		bs.speed = weaponInventory.bulletSpeed;
 		bs.origin = gameObject;
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
+		// Sound
+		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
+		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
+		audio.clip = weaponInventory.weaponShotSound;
+		audio.Play();
+		Destroy(newBulletSound, 1.0f);
+		// Remove Mun
 		weaponInventory.bulletNumber -= useMun;
 	}
 
@@ -122,6 +129,10 @@ public class PlayerMoveScript : MonoBehaviour {
 			return;
 		weaponInventory.gameObject.SetActive (true);
 		weaponInventory.gameObject.transform.position = transform.position;
+		Vector2 mouseInScreen = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 lookDir = new Vector2(mouseInScreen.x - transform.position.x, mouseInScreen.y - transform.position.y);
+		// weaponInventory.gameObject.GetComponent<Rigidbody2D>().AddForce(lookDir.normalized * 200.0f);
+		weaponInventory.dropWeapon(lookDir.normalized);
 		weaponInventory = null;
 		weaponSlot.SetActive (false);
 	}

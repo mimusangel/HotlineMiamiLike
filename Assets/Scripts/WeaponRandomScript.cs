@@ -15,6 +15,11 @@ public class WeaponRandomScript : MonoBehaviour {
 	public float[]				bulletsSpeed;
 	public float[]				bulletsLifeTime;
 
+	public float[]				shotSoundRanges;
+	public float[] 				weaponFrictions;
+
+	public AudioClip[]			weaponShotSounds;
+
 	void Start () {
 		int id = Random.Range (0, weaponSprites.Length);
 		WeaponScript ws = GetComponent<WeaponScript> ();
@@ -28,6 +33,9 @@ public class WeaponRandomScript : MonoBehaviour {
 		ws.bulletUsedByShot = bulletUsedByShots[id];
 		ws.bulletSpeed = bulletsSpeed [id];
 		ws.bulletLifeTime = bulletsLifeTime[id];
+		ws.weaponShotSound = weaponShotSounds[id];
+		ws.shotSoundRange = shotSoundRanges[id];
+		ws.weaponFriction = weaponFrictions[id];
 		GetComponent<SpriteRenderer> ().sprite = weaponSprites [id];
 	}
 }

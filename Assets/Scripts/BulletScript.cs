@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour {
 		if (coll.gameObject == origin || origin == null)
 			return;
 		if (coll.gameObject.tag == "Enemy") {
-
+			
 		}
 		if (coll.gameObject.tag == "Player") {
 
