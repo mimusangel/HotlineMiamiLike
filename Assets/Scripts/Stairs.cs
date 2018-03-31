@@ -21,6 +21,7 @@ public class Stairs : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
+			// player.GetComponent<PlayerMoveScript>()
 			onExit.Invoke();
 			// MenuManagerScript.mm.setMissionCompleteMenu(true);
 			// SceneManager.LoadScene(linkedScene);
