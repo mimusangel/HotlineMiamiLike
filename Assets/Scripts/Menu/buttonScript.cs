@@ -14,6 +14,10 @@ public class buttonScript : MonoBehaviour {
 
 	void Start()
 	{
+		if (!PlayerPrefs.HasKey("musicVolume"))
+			PlayerPrefs.SetFloat("musicVolume", 0.5f);
+		if (!PlayerPrefs.HasKey("soundsVolume"))
+			PlayerPrefs.SetFloat("soundsVolume", 0.5f);
 		if (musicSlider)
 			musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
 		if (soundsSlider)
