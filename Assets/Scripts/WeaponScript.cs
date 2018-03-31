@@ -55,8 +55,11 @@ public class WeaponScript : MonoBehaviour {
 				transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
 			}
 			if (rb2d.velocity.magnitude < 0.5f)
+			{
 				rb2d.velocity = Vector2.zero;
 				rotateSpeed = 0;
+			}
+				
 		}
 	}
 	
