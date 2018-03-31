@@ -55,6 +55,9 @@ TagManager:
   - name: player
     uniqueID: 1274651121
     locked: 0
+  - name: explode
+    uniqueID: 3251616413
+    locked: 0
   - name: ui
     uniqueID: 351805577
     locked: 0

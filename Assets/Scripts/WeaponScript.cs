@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour {
 
 	public enum Type {Dist, Katana, Hadoken};
-
+	public enum BulletType {Base, Laser, Explode, Fragment};
 	public string	weaponName;
 	public Sprite	weaponSprite;
 	public Sprite	weaponSlotSprite;
@@ -18,6 +18,8 @@ public class WeaponScript : MonoBehaviour {
 	public float	bulletLifeTime = 10.0f;
 	public float	shotSoundRange = 5.0f;
 	public float 	weaponFriction = 0.8f; 
+	public BulletType bulletType = BulletType.Base;
+
 	public AudioClip	weaponShotSound;
 
 	GameObject player;
@@ -33,22 +35,31 @@ public class WeaponScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (player) {
-			if (Input.GetKeyDown (KeyCode.E) || Input.GetMouseButtonDown (0)) {
-				player.GetComponent<PlayerMoveScript> ().pickWeapon (this);
-			}
-			else if (Input.GetKeyDown(KeyCode.C)) {
-				player.GetComponent<PlayerMoveScript> ().changeWeapon(this);
+		if (player != null) {
+			PlayerMoveScript pms = player.GetComponent<PlayerMoveScript> ();
+			if (pms)
+			{
+				if (Input.GetKeyDown (KeyCode.E) || Input.GetMouseButtonDown (0)) 
+					pms.pickWeapon (this);
+				else if (Input.GetKeyDown(KeyCode.C)) 
+					pms.changeWeapon(this);
 			}
 		}
 
 		if (rb2d.velocity != Vector2.zero)
 		{
 			rb2d.velocity *= weaponFriction;
-			rotate += rotateSpeed;
-			transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
+			if (rotateSpeed != 0)
+			{
+				rotate += rotateSpeed;
+				transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
+			}
 			if (rb2d.velocity.magnitude < 0.5f)
+			{
 				rb2d.velocity = Vector2.zero;
+				rotateSpeed = 0;
+			}
+				
 		}
 	}
 	
@@ -59,10 +70,13 @@ public class WeaponScript : MonoBehaviour {
 		if (other.gameObject.tag == "Enemy") {
 			if (weaponType == Type.Katana) {
 				// Tuer l'enemy
+				other.gameObject.GetComponent<DeathScript>().Death();
+				rb2d.velocity = Vector2.zero;
 			}
 			else
 			{
 				// Etourdir l'enemy
+				// other.gameObject.GetComponent<EnemyMoveScript>().SetS
 			}
 		}
 	}
@@ -76,6 +90,13 @@ public class WeaponScript : MonoBehaviour {
 	public void dropWeapon(Vector2 dir)
 	{
 		rb2d.velocity = dir * 20.0f;
-		rotateSpeed = Random.Range(20.0f, 25.0f);
+		if (weaponType == Type.Katana)
+		{
+			rotateSpeed = 0.0f;
+			float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+		}
+		else
+			rotateSpeed = Random.Range(20.0f, 25.0f);
 	}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour {
 
+	public AudioSource weaponNoBulletAudioSource;
 	public GameObject weaponSlot;
 	public GameObject weaponSound;
 	public float speed = 5.0f;
@@ -17,6 +18,7 @@ public class PlayerMoveScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		weaponNoBulletAudioSource.volume = PlayerPrefs.GetFloat("soundsVolume");
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		weaponSlot.SetActive (false);
@@ -59,7 +61,14 @@ public class PlayerMoveScript : MonoBehaviour {
 					if (weaponInventory.bulletUsedByShot > 1)
 							StartCoroutine(weaponShotRate(lookDir));
 						else
+						{
+							if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
+							{
+								weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * lookDir, 0);
+								weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * lookDir, 0);
+							}
 							weaponShot(lookDir, 1);
+						}
 				} else {
 					weaponShot(lookDir, 0);
 				}
@@ -83,7 +92,7 @@ public class PlayerMoveScript : MonoBehaviour {
 	{
 		if (weaponInventory.bulletNumber <= 0 && weaponInventory.weaponType == WeaponScript.Type.Dist)
 		{
-			GetComponent<AudioSource>().Play();
+			weaponNoBulletAudioSource.Play();
 			return;
 		}
 		Vector3 newPos = transform.position;
@@ -99,10 +108,12 @@ public class PlayerMoveScript : MonoBehaviour {
 		bs.speed = weaponInventory.bulletSpeed;
 		bs.origin = gameObject;
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
+		bs.type = weaponInventory.bulletType;
 		// Sound
 		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
 		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
 		audio.clip = weaponInventory.weaponShotSound;
+		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 		audio.Play();
 		Destroy(newBulletSound, 1.0f);
 		// Remove Mun
@@ -131,7 +142,6 @@ public class PlayerMoveScript : MonoBehaviour {
 		weaponInventory.gameObject.transform.position = transform.position;
 		Vector2 mouseInScreen = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 lookDir = new Vector2(mouseInScreen.x - transform.position.x, mouseInScreen.y - transform.position.y);
-		// weaponInventory.gameObject.GetComponent<Rigidbody2D>().AddForce(lookDir.normalized * 200.0f);
 		weaponInventory.dropWeapon(lookDir.normalized);
 		weaponInventory = null;
 		weaponSlot.SetActive (false);
