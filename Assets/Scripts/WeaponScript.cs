@@ -16,10 +16,18 @@ public class WeaponScript : MonoBehaviour {
 	public int		bulletUsedByShot = 1;
 	public float	bulletSpeed = 10.0f;
 	public float	bulletLifeTime = 10.0f;
+	public float	shotSoundRange = 5.0f;
+	public float 	weaponFriction = 0.8f; 
 	public AudioClip	weaponShotSound;
 
 	GameObject player;
 	
+	Rigidbody2D	rigidbody;
+
+	private void Start() {
+		rigidbody = GetComponent<Rigidbody2D>();
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (player) {
@@ -29,6 +37,13 @@ public class WeaponScript : MonoBehaviour {
 			else if (Input.GetKeyDown(KeyCode.C)) {
 				player.GetComponent<PlayerMoveScript> ().changeWeapon(this);
 			}
+		}
+
+		if (rigidbody.velocity != Vector2.zero)
+		{
+			rigidbody.velocity *= weaponFriction;
+			if (rigidbody.velocity.magnitude < 0.05f)
+				rigidbody.velocity = Vector2.zero;
 		}
 	}
 	
@@ -44,4 +59,8 @@ public class WeaponScript : MonoBehaviour {
 		}
 	}
 
+	public void dropWeapon(Vector2 dir)
+	{
+		rigidbody.velocity = dir * 20.0f;
+	}
 }

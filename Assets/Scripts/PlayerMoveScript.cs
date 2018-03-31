@@ -129,6 +129,10 @@ public class PlayerMoveScript : MonoBehaviour {
 			return;
 		weaponInventory.gameObject.SetActive (true);
 		weaponInventory.gameObject.transform.position = transform.position;
+		Vector2 mouseInScreen = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 lookDir = new Vector2(mouseInScreen.x - transform.position.x, mouseInScreen.y - transform.position.y);
+		// weaponInventory.gameObject.GetComponent<Rigidbody2D>().AddForce(lookDir.normalized * 200.0f);
+		weaponInventory.dropWeapon(lookDir.normalized);
 		weaponInventory = null;
 		weaponSlot.SetActive (false);
 	}
