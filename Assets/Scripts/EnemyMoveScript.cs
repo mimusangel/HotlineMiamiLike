@@ -11,6 +11,9 @@ public class EnemyMoveScript : MonoBehaviour {
 	public bool patrolRandom;
 
 	// private values
+
+	private bool stunned;
+	private float stunnedTime;
 	private int patrolIndex;
 	private Vector2 targetPoint;
 	private float lastMoveTime;
@@ -26,6 +29,7 @@ public class EnemyMoveScript : MonoBehaviour {
 	void Start () {
 
 		// private values inits
+		stunned = false;
 		patrolIndex = 0;
 		targetPoint = gameObject.transform.position;
 		currentlyMoving = false;
@@ -49,7 +53,19 @@ public class EnemyMoveScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// continue patrol
+		if (Input.GetKeyDown("a")) {
+			SetStunned(true, 1.0f);
+		}
+
+		if (stunned) {
+			stunnedTime -= Time.deltaTime;
+			if (stunnedTime <= 0.0f)
+				SetStunned(false);
+		} else
+			UpdateMove();
+	}
+
+	void UpdateMove() {
 		if (currentlyMoving) {
 			Vector2 dir = targetPoint - (Vector2)gameObject.transform.position;
 			transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
@@ -84,7 +100,21 @@ public class EnemyMoveScript : MonoBehaviour {
 	}
 
 	void NoiseListener(Vector2 noisePosition, float noiseRange) {
+		if (Vector2.Distance(transform.position, noisePosition) <= noiseRange) {
+			Debug.Log("noise heard");
+		}
+	}
 
+	void SetStunned(bool s, float time = 0) {
+		stunned = s;
+		if (s) {
+			bodyComponent.velocity = new Vector2(0, 0);
+			bodyComponent.angularVelocity = 360 * 2;
+			stunnedTime = time;
+		} else {
+			bodyComponent.velocity = new Vector2(0, 0);
+			bodyComponent.angularVelocity = 0.0f;
+		}
 	}
 
 }
