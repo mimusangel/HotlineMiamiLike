@@ -6,6 +6,7 @@ public class WeaponScript : MonoBehaviour {
 
 	public enum Type {Dist, Katana, Hadoken};
 
+	public string	weaponName;
 	public Sprite	weaponSprite;
 	public Sprite	weaponSlotSprite;
 	public Sprite	bulletSprite;

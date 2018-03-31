@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponRandomScript : MonoBehaviour {
 
+	public string[]				weaponsName;
 	public Sprite[]				weaponSprites;
 	public Sprite[]				weaponSlotSprites;
 	public Sprite[]				bulletSprites;
@@ -17,6 +18,7 @@ public class WeaponRandomScript : MonoBehaviour {
 	void Start () {
 		int id = Random.Range (0, weaponSprites.Length);
 		WeaponScript ws = GetComponent<WeaponScript> ();
+		ws.weaponName = weaponsName[id];
 		ws.weaponSprite = weaponSprites [id];
 		ws.weaponSlotSprite = weaponSlotSprites[id];
 		ws.bulletSprite = bulletSprites[id];
