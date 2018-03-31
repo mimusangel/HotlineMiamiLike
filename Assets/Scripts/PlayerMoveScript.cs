@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour {
 
+	public AudioSource weaponNoBulletAudioSource;
 	public GameObject weaponSlot;
 	public GameObject weaponSound;
 	public float speed = 5.0f;
@@ -83,7 +84,7 @@ public class PlayerMoveScript : MonoBehaviour {
 	{
 		if (weaponInventory.bulletNumber <= 0 && weaponInventory.weaponType == WeaponScript.Type.Dist)
 		{
-			GetComponent<AudioSource>().Play();
+			weaponNoBulletAudioSource.Play();
 			return;
 		}
 		Vector3 newPos = transform.position;

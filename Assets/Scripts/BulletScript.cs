@@ -23,15 +23,13 @@ public class BulletScript : MonoBehaviour {
 		if (coll.gameObject == origin || origin == null)
 			return;
 		if (coll.gameObject.tag == "Enemy") {
-			Destroy(coll.gameObject);
+			coll.gameObject.GetComponent<DeathScript>().Death();
 		}
 		if (coll.gameObject.tag == "Player") {
-			Destroy(coll.gameObject);
+			coll.gameObject.GetComponent<DeathScript>().Death();
 		}
 		if (type == WeaponScript.BulletType.Explode)
-		{
-
-		}
+			GameObject.Instantiate(explode, transform.position, transform.rotation);
 		if (type != WeaponScript.BulletType.Laser)
 			Destroy (gameObject);
 		else if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player")
