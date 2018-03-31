@@ -22,10 +22,13 @@ public class WeaponScript : MonoBehaviour {
 
 	GameObject player;
 	
-	Rigidbody2D	rigidbody;
+	Rigidbody2D	rb2d;
+
+	float	rotate = 0.0f;
+	float	rotateSpeed;
 
 	private void Start() {
-		rigidbody = GetComponent<Rigidbody2D>();
+		rb2d = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
@@ -39,17 +42,28 @@ public class WeaponScript : MonoBehaviour {
 			}
 		}
 
-		if (rigidbody.velocity != Vector2.zero)
+		if (rb2d.velocity != Vector2.zero)
 		{
-			rigidbody.velocity *= weaponFriction;
-			if (rigidbody.velocity.magnitude < 0.05f)
-				rigidbody.velocity = Vector2.zero;
+			rb2d.velocity *= weaponFriction;
+			rotate += rotateSpeed;
+			transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
+			if (rb2d.velocity.magnitude < 0.5f)
+				rb2d.velocity = Vector2.zero;
 		}
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			player = other.gameObject;
+		}
+		if (other.gameObject.tag == "Enemy") {
+			if (weaponType == Type.Katana) {
+				// Tuer l'enemy
+			}
+			else
+			{
+				// Etourdir l'enemy
+			}
 		}
 	}
 
@@ -61,6 +75,7 @@ public class WeaponScript : MonoBehaviour {
 
 	public void dropWeapon(Vector2 dir)
 	{
-		rigidbody.velocity = dir * 20.0f;
+		rb2d.velocity = dir * 20.0f;
+		rotateSpeed = Random.Range(20.0f, 25.0f);
 	}
 }
