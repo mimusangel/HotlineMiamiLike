@@ -16,6 +16,7 @@ public class WeaponScript : MonoBehaviour {
 	public int		bulletUsedByShot = 1;
 	public float	bulletSpeed = 10.0f;
 	public float	bulletLifeTime = 10.0f;
+	public AudioClip	weaponShotSound;
 
 	GameObject player;
 	
