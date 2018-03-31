@@ -9,11 +9,11 @@ public class MenuManagerScript : MonoBehaviour {
 	public GameObject				menu;
 	public GameObject				gameOverMenu;
 	public GameObject				missionCompleteMenu;
-	void Awake () {
+
+	private void Awake() {
 		if (mm == null)
 			mm = this;
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		

@@ -255,11 +255,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 114957010879020758, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 225610044}
     - target: {fileID: 1166959412007190, guid: f585c4f96a4544223a28d6da23fa66b3, type: 2}
       propertyPath: m_Name
       value: HUD
@@ -269,6 +264,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1945875652}
+    - target: {fileID: 114957010879020758, guid: f585c4f96a4544223a28d6da23fa66b3,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 225610044}
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchorMin.y

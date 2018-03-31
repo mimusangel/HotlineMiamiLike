@@ -15,7 +15,7 @@ public class DeathScript : MonoBehaviour {
 		}
 		if (gameObject.tag == "Player")
 		{
-			
+			MenuManagerScript.mm.setGameOverMenu(true);
 		}
 		Destroy(gameObject);
 	}

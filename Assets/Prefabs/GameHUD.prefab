@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 222016737009385704}
   - component: {fileID: 114493963952065148}
   - component: {fileID: 114788291609933406}
-  - component: {fileID: 114046054700994736}
   m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
@@ -370,6 +369,7 @@ GameObject:
   - component: {fileID: 114183551117836676}
   - component: {fileID: 114960572557361506}
   - component: {fileID: 114957010879020758}
+  - component: {fileID: 114938036846701386}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -523,20 +523,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114046054700994736
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1269708746001824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c7c9d3189f8b472e942c00be7768c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menu: {fileID: 1269708746001824}
-  gameOverMenu: {fileID: 1527345740120402}
-  missionCompleteMenu: {fileID: 1095501408241398}
 --- !u!114 &114049080212095580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1264,6 +1250,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114938036846701386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989144582274340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7c9d3189f8b472e942c00be7768c1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 1269708746001824}
+  gameOverMenu: {fileID: 1527345740120402}
+  missionCompleteMenu: {fileID: 1095501408241398}
 --- !u!114 &114957010879020758
 MonoBehaviour:
   m_ObjectHideFlags: 1
