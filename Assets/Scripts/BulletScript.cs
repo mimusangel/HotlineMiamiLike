@@ -9,7 +9,7 @@ public class BulletScript : MonoBehaviour {
 	public GameObject origin = null;
 
 	void Start() {
-		Destroy (gameObject, 10.0f);
+		
 	}
 
 	void Update () {
@@ -26,5 +26,9 @@ public class BulletScript : MonoBehaviour {
 
 		}
 		Destroy (gameObject);
+	}
+
+	public void setLifeTime(float time) {
+		Destroy (gameObject , time);
 	}
 }
