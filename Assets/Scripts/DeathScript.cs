@@ -45,4 +45,9 @@ public class DeathScript : MonoBehaviour {
 		if (player)
 			Destroy(player);
 	}
+
+	public static void DestroyPlayer()
+	{
+		Destroy(player);
+	}
 }
