@@ -6,15 +6,19 @@ using UnityEngine.SceneManagement;
 public class Stairs : MonoBehaviour {
 
 	public string linkedScene;
+	public Transform spawn;
+	public Transform player;
 
 	// Use this for initialization
 	void Start () {
-		
+		if (PlayerPrefs.GetString("lastLoadedScene") == linkedScene) {
+			player.transform.position = spawn.position;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
-			Debug.Log("goind to scene " + linkedScene);
+			PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
 			SceneManager.LoadScene(linkedScene);
 		}
 	}
