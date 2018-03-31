@@ -38,7 +38,6 @@ public class Shaker : MonoBehaviour {
 	}
 
 	IEnumerator ShakeRoutine() {
-		Vector3 startPosition = transform.position;
 		List<Vector3> shakePositions = new List<Vector3>() {
 			transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0),
 			transform.position + new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0),
@@ -50,7 +49,7 @@ public class Shaker : MonoBehaviour {
 		};
 		foreach(Vector3 shakePos in shakePositions) 
 		{
-			transform.position = Vector3.MoveTowards(startPosition, shakePos, 5.0f * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, shakePos, 5.0f * Time.deltaTime);
 			yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
 		};
 	}
