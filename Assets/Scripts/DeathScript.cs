@@ -13,7 +13,10 @@ public class DeathScript : MonoBehaviour {
 			go.GetComponent<AudioSource>().clip = deathAudioList[Random.Range(0, deathAudioList.Length)];
 			go.GetComponent<AudioSource>().Play();
 		}
-
+		if (gameObject.tag == "Player")
+		{
+			
+		}
 		Destroy(gameObject);
 	}
 }
