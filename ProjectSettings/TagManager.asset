@@ -18,8 +18,8 @@ TagManager:
   - Bullet
   - Door
   - StaticMap
-  - 
-  - 
+  - Entity
+  - Weapon
   - 
   - 
   - 
