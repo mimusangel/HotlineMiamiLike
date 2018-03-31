@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class ExitCar : MonoBehaviour {
 
 	public string nextScene;
 	public List<GameObject> objectsToDisable;
+	public UnityEvent onExit;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +18,7 @@ public class ExitCar : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player") {
 			PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
-			other.gameObject.SetActive(false);
+			DeathScript.DestroyPlayer();
 			GetComponent<Animator>().SetTrigger("Jump");
 			Camera.main.GetComponent<CameraFollowScript>().follow = gameObject;
 		}
@@ -27,7 +29,7 @@ public class ExitCar : MonoBehaviour {
 	}
 
 	public void LoadNextScene() {
-		SceneManager.LoadScene(nextScene);
+		onExit.Invoke();
 	}
 
 
