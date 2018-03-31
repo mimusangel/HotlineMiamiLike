@@ -10,8 +10,10 @@ public class DeathScript : MonoBehaviour {
 		if (deathAudioSource)
 		{
 			GameObject go = GameObject.Instantiate(deathAudioSource, transform.position, Quaternion.identity);
-			go.GetComponent<AudioSource>().clip = deathAudioList[Random.Range(0, deathAudioList.Length)];
-			go.GetComponent<AudioSource>().Play();
+			AudioSource audio = go.GetComponent<AudioSource>();
+			audio.clip = deathAudioList[Random.Range(0, deathAudioList.Length)];
+			audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+			audio.Play();
 		}
 		if (gameObject.tag == "Player")
 		{
