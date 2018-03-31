@@ -23,13 +23,9 @@ public class SaveUserEditor : Editor
 
 public class Shaker : MonoBehaviour {
 
-	private Camera cam;
-	private Animator anim;
-
 	// Use this for initialization
 	void Start () {
-		cam = GetComponent<Camera>();
-		anim = GetComponent<Animator>();
+		
 	}
 
 	void Update() {
