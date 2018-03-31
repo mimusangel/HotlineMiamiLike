@@ -12,6 +12,11 @@ public class buttonScript : MonoBehaviour {
 	public UnityEngine.UI.Slider	soundsSlider;
 	public AudioSource				audioSource;
 
+	void Start()
+	{
+		musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
+		soundsSlider.value = PlayerPrefs.GetFloat("soundsVolume");
+	}
 	public void play()
 	{
 		SceneManager.LoadScene("Scenes/Level1");
