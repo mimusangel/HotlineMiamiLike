@@ -25,6 +25,7 @@ public class buttonScript : MonoBehaviour {
 	}
 	public void play()
 	{
+		PlayerPrefs.DeleteKey("lastLoadedScene");
 		SceneManager.LoadScene("Scenes/Level1");
 	}
 
