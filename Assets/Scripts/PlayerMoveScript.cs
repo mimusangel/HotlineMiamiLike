@@ -47,6 +47,7 @@ public class PlayerMoveScript : MonoBehaviour {
 			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 			transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 		}
+
 		fireWait -= Time.deltaTime;
 		if (fireWait < 0)
 			fireWait = 0;
@@ -84,6 +85,12 @@ public class PlayerMoveScript : MonoBehaviour {
 		weaponInventory.gameObject.SetActive (false);
 		weaponSlot.SetActive (true);
 		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+	}
+
+	public void changeWeapon(WeaponScript weapon)
+	{
+		dropWeapon();
+		pickWeapon(weapon);
 	}
 
 	public void dropWeapon() {

@@ -20,8 +20,11 @@ public class WeaponScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player) {
-			if (Input.GetKeyDown (KeyCode.E)) {
+			if (Input.GetKeyDown (KeyCode.E) || Input.GetMouseButtonDown (0)) {
 				player.GetComponent<PlayerMoveScript> ().pickWeapon (this);
+			}
+			else if (Input.GetKeyDown(KeyCode.C)) {
+				player.GetComponent<PlayerMoveScript> ().changeWeapon(this);
 			}
 		}
 	}
