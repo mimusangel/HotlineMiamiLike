@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMoveScript : MonoBehaviour {
 
 	public GameObject weaponSlot;
+	public GameObject weaponSound;
 	public float speed = 5.0f;
 
 	Rigidbody2D rb;
@@ -73,7 +74,8 @@ public class PlayerMoveScript : MonoBehaviour {
 	{
 		for (int i = 0; i < weaponInventory.bulletUsedByShot; i++)
 		{
-			weaponShot(lookDir, 1);
+			if (weaponInventory)
+				weaponShot(lookDir, 1);
 			yield return new WaitForSeconds(0.1f);
 		}
 	}
@@ -86,24 +88,24 @@ public class PlayerMoveScript : MonoBehaviour {
 		}
 		Vector3 newPos = transform.position;
 		Vector2 lookDirNorm = lookDir.normalized;
-		newPos.x += lookDirNorm.x * 0.75f;
-		newPos.y += lookDirNorm.y * 0.75f;
+		newPos.x += lookDirNorm.x * 0.5f;
+		newPos.y += lookDirNorm.y * 0.5f;
 		GameObject newBullet;
-		if (lookDir != Vector2.zero) {
-			float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-			newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
-		}
-		else
-			newBullet = GameObject.Instantiate (bullet, newPos, transform.rotation);
+		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+		newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
 		newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
 		BulletScript bs = newBullet.GetComponent<BulletScript> ();
 		bs.dir = lookDir.normalized;
 		bs.speed = weaponInventory.bulletSpeed;
 		bs.origin = gameObject;
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
-		AudioSource audio = newBullet.GetComponent<AudioSource>();
+		// Sound
+		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
+		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
 		audio.clip = weaponInventory.weaponShotSound;
 		audio.Play();
+		Destroy(newBulletSound, 1.0f);
+		// Remove Mun
 		weaponInventory.bulletNumber -= useMun;
 	}
 
