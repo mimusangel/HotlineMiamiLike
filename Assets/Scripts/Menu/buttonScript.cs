@@ -12,18 +12,21 @@ public class buttonScript : MonoBehaviour {
 	public UnityEngine.UI.Slider	soundsSlider;
 	public AudioSource				audioSource;
 
-	void Update()
-	{
-	}
-
 	public void play()
 	{
 		SceneManager.LoadScene("Scenes/Level1");
 	}
+
+	public void loadLevel(string name)
+	{
+		SceneManager.LoadScene(name);
+	}
+
 	public void exit()
 	{
 		Application.Quit();
 	}
+
 	public void toMenu(int i)
 	{
 		if (menus.Length > i)
@@ -33,6 +36,7 @@ public class buttonScript : MonoBehaviour {
 			menus[i].SetActive(true);
 		}
 	}
+
 	public void musicVolume()
 	{
 		if (menus.Length > 0)
@@ -42,9 +46,20 @@ public class buttonScript : MonoBehaviour {
 			audioSource.volume = PlayerPrefs.GetFloat("musicVolume");
 		}
 	}
+
 	public void soundsVolume()
 	{
 		PlayerPrefs.SetFloat("soundsVolume", soundsSlider.value);
 		PlayerPrefs.Save();
+	}
+
+	public void backToMenu()
+	{
+		SceneManager.LoadScene("Scenes/MainMenu");
+	}
+
+	public void restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }

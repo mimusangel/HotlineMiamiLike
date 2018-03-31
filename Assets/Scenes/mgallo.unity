@@ -255,11 +255,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 24
       objectReference: {fileID: 0}
-    - target: {fileID: 114957010879020758, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 225610044}
     - target: {fileID: 1166959412007190, guid: f585c4f96a4544223a28d6da23fa66b3, type: 2}
       propertyPath: m_Name
       value: HUD
@@ -269,46 +264,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1945875652}
-    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
+    - target: {fileID: 114957010879020758, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 284.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 284.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 225610044}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f585c4f96a4544223a28d6da23fa66b3, type: 2}
   m_IsPrefabParent: 0

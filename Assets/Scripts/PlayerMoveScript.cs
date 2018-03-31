@@ -18,6 +18,7 @@ public class PlayerMoveScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		weaponNoBulletAudioSource.volume = PlayerPrefs.GetFloat("soundsVolume");
 		rb = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
 		weaponSlot.SetActive (false);
@@ -105,6 +106,7 @@ public class PlayerMoveScript : MonoBehaviour {
 		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
 		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
 		audio.clip = weaponInventory.weaponShotSound;
+		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 		audio.Play();
 		Destroy(newBulletSound, 1.0f);
 		// Remove Mun
