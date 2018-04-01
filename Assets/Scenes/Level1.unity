@@ -12282,6 +12282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f94624db314364e7e99b0cef030a91b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeSource: {fileID: 0}
 --- !u!4 &1113183728 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4716441019340382, guid: 6bf2092b1fd2046249ebeed258a440f5,
@@ -21569,7 +21570,7 @@ Prefab:
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 355
+      value: 373.75
       objectReference: {fileID: 0}
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
@@ -21589,7 +21590,7 @@ Prefab:
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 355
+      value: 373.75
       objectReference: {fileID: 0}
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}

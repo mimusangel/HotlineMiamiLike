@@ -7,6 +7,7 @@ public class PlayerMoveScript : MonoBehaviour {
 	public AudioSource weaponNoBulletAudioSource;
 	public GameObject weaponSlot;
 	public GameObject weaponSound;
+	public AudioClip pickupSound;
 	public float speed = 5.0f;
 
 	Rigidbody2D rb;
@@ -136,6 +137,18 @@ public class PlayerMoveScript : MonoBehaviour {
 		weaponInventory.gameObject.SetActive (false);
 		weaponSlot.SetActive (true);
 		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+		// Sound
+		playSound(pickupSound);
+	}
+
+	public void	playSound(AudioClip clip, float deathTime = 1.0f) 
+	{
+		GameObject newSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
+		AudioSource audio = newSound.GetComponent<AudioSource>();
+		audio.clip = clip;
+		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+		audio.Play();
+		Destroy(newSound, deathTime);
 	}
 
 	public void changeWeapon(WeaponScript weapon)

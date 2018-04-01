@@ -102,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247876224283930}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.5, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4873979445894784}
@@ -364,6 +364,7 @@ MonoBehaviour:
   weaponSlot: {fileID: 1021269829904088}
   weaponSound: {fileID: 1365951117098308, guid: 28a679177eeed40e19a66b7e7a94b1a2,
     type: 2}
+  pickupSound: {fileID: 8300000, guid: bd5112458d23d48faa52fe82499275ed, type: 3}
   speed: 5
   bullet: {fileID: 1885178431705906, guid: 3ca8fe946a8a94de08c7a66f6ee2eaa0, type: 2}
 --- !u!114 &114508119038456540
@@ -377,6 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f73185138a214dc4a51dfa5b598929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 1
   deathAudioSource: {fileID: 1365951117098308, guid: 28a679177eeed40e19a66b7e7a94b1a2,
     type: 2}
   deathAudioList:
@@ -384,6 +386,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8aed53bbcb68b4702a6d7e2e06ddf294, type: 3}
   - {fileID: 8300000, guid: c7ecc4a937cca491da8741b12f4522b3, type: 3}
   - {fileID: 8300000, guid: 61f34fee662fe406994204e8723ee10c, type: 3}
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!212 &212070009483145156
 SpriteRenderer:
   m_ObjectHideFlags: 1

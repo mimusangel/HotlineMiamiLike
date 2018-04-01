@@ -32,6 +32,7 @@ public class DeathScript : MonoBehaviour {
 		if (gameObject.tag == "Player")
 		{
 			MenuManagerScript.mm.setGameOverMenu(true);
+			DeathManager.instance.lose();
 		}
 		
 		if (gameObject.tag == "Enemy")
@@ -46,5 +47,10 @@ public class DeathScript : MonoBehaviour {
 	public static void DestroyPlayer()
 	{
 		Destroy(player);
+	}
+
+	public static void playSound(AudioClip clip, float deathTime = 1.0f)
+	{
+		player.GetComponent<PlayerMoveScript>().playSound(clip, deathTime);
 	}
 }
