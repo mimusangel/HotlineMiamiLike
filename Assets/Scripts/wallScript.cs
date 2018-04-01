@@ -19,7 +19,7 @@ public class wallScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player")
+		if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player" && coll.gameObject.tag != "Map")
 		{
 			getHit();
 		}

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61249760152656368}
   - component: {fileID: 50785494036393766}
   - component: {fileID: 114889180821209660}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: wall_TL_breakable
   m_TagString: Map
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1436880608836412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -4.5, z: 0}
+  m_LocalPosition: {x: -17.576744, y: 1.0596505, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cracked: {fileID: 21300002, guid: ec1db47cc0164419a8d4c3aa5fc7666c, type: 3}
   broken: {fileID: 21300002, guid: 6a945b6e131e440ca8e9dcfde2a9635a, type: 3}
-  isCracked: 0
 --- !u!212 &212194191882562948
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -133,9 +132,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -164294885
+  m_SortingLayer: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300070, guid: 43f81462aaf4743a29d1d8f7773afc4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

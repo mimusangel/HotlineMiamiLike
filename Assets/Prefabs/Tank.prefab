@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f73185138a214dc4a51dfa5b598929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 15
+  Hp: 30
   deathAudioSource: {fileID: 1365951117098308, guid: 28a679177eeed40e19a66b7e7a94b1a2,
     type: 2}
   deathAudioList:
