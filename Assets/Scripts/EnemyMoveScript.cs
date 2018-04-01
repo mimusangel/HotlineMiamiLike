@@ -11,6 +11,8 @@ public class EnemyMoveScript : MonoBehaviour {
 	public float sightRadius;
 	public float sightAngle;
 	public SpriteRenderer alertedIcon;
+	public SpriteRenderer headRenderer;
+	public SpriteRenderer bodyRenderer;
 
 	// private values
 
@@ -44,6 +46,12 @@ public class EnemyMoveScript : MonoBehaviour {
 	private GameObject playerChar;
 	private Animator animatorComponent;
 	private Rigidbody2D bodyComponent;
+
+	// Weapon
+	public GameObject weaponSlot;
+	WeaponScript weaponInventory = null;
+	public GameObject	bullet;
+	public GameObject	weaponSound;
 
 	void OnDrawGizmos() {
 		float lookDirection = (transform.eulerAngles.z - 90) * Mathf.Deg2Rad;
@@ -96,6 +104,14 @@ public class EnemyMoveScript : MonoBehaviour {
 		animatorComponent = GetComponent<Animator>();
 		bodyComponent = GetComponent<Rigidbody2D>();
 
+		// Weapon
+		weaponInventory = GetComponent<WeaponScript>();
+		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+
+		// Sprite Random
+		headRenderer.sprite = EnemyRandomScript.instance.getRandomHead();
+		bodyRenderer.sprite = EnemyRandomScript.instance.getRandomBody();
+
 		SetState(alertState);
 	}
 
@@ -112,8 +128,11 @@ public class EnemyMoveScript : MonoBehaviour {
 				SetStunned(false);
 		} else {
 			UpdateMove();
-			if (alertState != AlertState.attack && CanSeePosition(playerChar.transform.position)) {
-				SetState(AlertState.attack);
+			if (playerChar)
+			{
+				if (alertState != AlertState.attack && CanSeePosition(playerChar.transform.position)) {
+					SetState(AlertState.attack);
+				}
 			}
 		}
 	}
@@ -135,7 +154,7 @@ public class EnemyMoveScript : MonoBehaviour {
 				}
 				break;
 			case AlertState.attack:
-				if (CanSeePosition(playerChar.transform.position))
+				if (playerChar && CanSeePosition(playerChar.transform.position))
 					UpdateAttackPlayer();
 				else {
 					checkingNoisePosition = lastPlayerSeenPosition;
@@ -154,6 +173,7 @@ public class EnemyMoveScript : MonoBehaviour {
 		shootCooldown -= Time.deltaTime;
 		if (shootCooldown <= 0.0f) {
 			// TODO: shoot
+			weaponShot(dir.normalized);
 			shootCooldown = 1.0f;
 		}
 	}
@@ -280,6 +300,31 @@ public class EnemyMoveScript : MonoBehaviour {
 			yield return new WaitForSeconds(0.025f);
 		}
 		alertedIcon.transform.localScale = new Vector3(0, 0, 1);
+	}
+
+	private void weaponShot(Vector2 lookDir)
+	{
+		Vector3 newPos = transform.position;
+		Vector2 lookDirNorm = lookDir.normalized;
+		newPos.x += lookDirNorm.x * 0.5f;
+		newPos.y += lookDirNorm.y * 0.5f;
+		GameObject newBullet;
+		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+		newBullet = GameObject.Instantiate (bullet, newPos, Quaternion.AngleAxis(angle, Vector3.forward));
+		newBullet.GetComponent<SpriteRenderer> ().sprite = weaponInventory.bulletSprite;
+		BulletScript bs = newBullet.GetComponent<BulletScript> ();
+		bs.dir = lookDir.normalized;
+		bs.speed = weaponInventory.bulletSpeed;
+		bs.origin = gameObject;
+		bs.setLifeTime(weaponInventory.bulletLifeTime);
+		bs.type = weaponInventory.bulletType;
+		// Sound
+		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
+		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
+		audio.clip = weaponInventory.weaponShotSound;
+		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+		audio.Play();
+		Destroy(newBulletSound, 1.0f);
 	}
 
 }

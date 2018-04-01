@@ -116,6 +116,7 @@ public class PlayerMoveScript : MonoBehaviour {
 		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 		audio.Play();
 		Destroy(newBulletSound, 1.0f);
+		
 		// Remove Mun
 		weaponInventory.bulletNumber -= useMun;
 	}

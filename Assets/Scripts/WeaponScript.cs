@@ -41,6 +41,8 @@ public class WeaponScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (gameObject.tag == "Enemy")
+			return ;
 		if (player != null) {
 			PlayerMoveScript pms = player.GetComponent<PlayerMoveScript> ();
 			if (pms)
@@ -70,6 +72,8 @@ public class WeaponScript : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
+		if (gameObject.tag == "Enemy")
+			return ;
 		if (other.gameObject.tag == "Player") {
 			player = other.gameObject;
 		}
@@ -82,12 +86,15 @@ public class WeaponScript : MonoBehaviour {
 			else
 			{
 				// Etourdir l'enemy
-				// other.gameObject.GetComponent<EnemyMoveScript>().SetS
+				if (rb2d.velocity != Vector2.zero)
+					other.gameObject.GetComponent<EnemyMoveScript>().SetStunned(true, 2.0f);
 			}
 		}
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
+		if (gameObject.tag == "Enemy")
+			return ;
 		if (player == other.gameObject) {
 			player = null;
 		}
