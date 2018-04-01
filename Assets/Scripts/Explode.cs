@@ -33,11 +33,19 @@ public class Explode : MonoBehaviour {
 				other.gameObject.GetComponent<DeathScript>().Death();
 			}
 		}
-		if (other.gameObject.tag == "Enemy")
+		else if (other.gameObject.tag == "Enemy")
 		{
 			if (testHit(other.gameObject))
 			{
 				other.gameObject.GetComponent<DeathScript>().Death();
+			}
+		}
+		else if (other.gameObject.tag == "Map")
+		{
+			windowScript window = other.gameObject.GetComponent<windowScript>();
+			if (window)
+			{
+				window.Broken();
 			}
 		}
 	}

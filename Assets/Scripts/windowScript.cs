@@ -19,8 +19,13 @@ public class windowScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player")
 		{
-			spriteR.sprite = broken;
-			GetComponent<Collider2D>().enabled = false;
+			Broken();
 		}
+	}
+
+	public void Broken()
+	{
+		spriteR.sprite = broken;
+		GetComponent<Collider2D>().enabled = false;
 	}
 }

@@ -79,7 +79,7 @@ public class WeaponScript : MonoBehaviour {
 		}
 		if (other.gameObject.tag == "Enemy") {
 			if (rb2d.velocity != Vector2.zero)
-				return ;
+				return;
 			if (weaponType == Type.Katana) {
 				// Tuer l'enemy
 				other.gameObject.GetComponent<DeathScript>().Death();
