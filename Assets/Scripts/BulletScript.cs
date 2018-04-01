@@ -24,6 +24,8 @@ public class BulletScript : MonoBehaviour {
 			Destroy(gameObject);
 		if (coll.gameObject == origin)
 			return;
+		if (coll.gameObject.tag == "Enemy" && origin.tag == "Enemy")
+			return ;
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<DeathScript>().Death();
 		}

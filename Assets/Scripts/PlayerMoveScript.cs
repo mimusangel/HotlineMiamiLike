@@ -16,6 +16,8 @@ public class PlayerMoveScript : MonoBehaviour {
 	public GameObject	bullet;
 	float fireWait = 0.0f;
 
+	float dash = 0.0f;
+
 	// Use this for initialization
 	void Start () {
 		weaponNoBulletAudioSource.volume = PlayerPrefs.GetFloat("soundsVolume");
@@ -36,8 +38,13 @@ public class PlayerMoveScript : MonoBehaviour {
 		if (Input.GetKey (KeyCode.D))
 			dir += Vector2.right;
 		if (dir != Vector2.zero) {
+			dash *= 0.9f;
+			if (dash < 0.1f)
+				dash = 0.0f;
+			if (Input.GetKeyDown(KeyCode.Space) && dash <= 0.0f)
+				dash = speed * 3;
 			dir.Normalize ();
-			rb.velocity = dir * speed;
+			rb.velocity = dir * (speed + dash);
 			anim.SetBool ("run", true);
 		} else {
 			rb.velocity = Vector2.zero;
