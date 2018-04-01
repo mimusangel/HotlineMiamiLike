@@ -165,9 +165,10 @@ public class EnemyMoveScript : MonoBehaviour {
 				}
 				break;
 			case AlertState.attack:
-				if (playerChar && CanSeePosition(playerChar.transform.position))
+				if (playerChar && CanSeePosition(playerChar.transform.position)) {
 					UpdateAttackPlayer();
-				else {
+					UpdateMoveToward(lastPlayerSeenPosition);
+				} else {
 					checkingNoisePosition = lastPlayerSeenPosition;
 					SetState(AlertState.checkNoise);
 				}
@@ -177,14 +178,12 @@ public class EnemyMoveScript : MonoBehaviour {
 
 	void UpdateAttackPlayer() {
 		lastPlayerSeenPosition = playerChar.transform.position;
-		bodyComponent.velocity = Vector2.zero;
-		bodyComponent.angularVelocity = 0.0f;
 		Vector2 dir = lastPlayerSeenPosition - (Vector2)gameObject.transform.position;
 		transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 		shootCooldown -= Time.deltaTime;
 		if (shootCooldown <= 0.0f) {
 			weaponShot(dir.normalized);
-			shootCooldown = weaponInventory.timeToShot;
+			shootCooldown = 1.0f;
 		}
 	}
 
@@ -197,6 +196,7 @@ public class EnemyMoveScript : MonoBehaviour {
 		}
 		dir.Normalize();
 		bodyComponent.velocity = dir * moveSpeed;
+		bodyComponent.angularVelocity = 0.0f;
 		animatorComponent.SetBool("run", true);
 	}
 
