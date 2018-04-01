@@ -25,7 +25,7 @@ public class Explode : MonoBehaviour {
 			Destroy(gameObject);
 	}
 
-	private void OnTriggerStay2D(Collider2D other) {
+	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player")
 		{
 			if (testHit(other.gameObject))
@@ -44,10 +44,11 @@ public class Explode : MonoBehaviour {
 		else if (other.gameObject.tag == "Map")
 		{
 			windowScript window = other.gameObject.GetComponent<windowScript>();
+			wallScript wall = other.gameObject.GetComponent<wallScript>();
 			if (window)
-			{
 				window.Broken();
-			}
+			else if (wall)
+				wall.getHit();
 		}
 	}
 
