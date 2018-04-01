@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DeathScript : MonoBehaviour {
+	public int Hp = 1;
 	public GameObject deathAudioSource;
 	public AudioClip[] deathAudioList;
 	static int	enemyNB = -1;
 	static GameObject	player;
+	public UnityEvent onDead;
+	
 	private void Start() {
 		if (enemyNB == -1)
 			enemyNB = GameObject.FindGameObjectsWithTag("Enemy").Length;
@@ -16,6 +20,9 @@ public class DeathScript : MonoBehaviour {
 
 	public void Death()
 	{
+		Hp --;
+		if (Hp > 0)
+			return;
 		if (deathAudioSource)
 		{
 			GameObject go = GameObject.Instantiate(deathAudioSource, transform.position, Quaternion.identity);
@@ -29,11 +36,13 @@ public class DeathScript : MonoBehaviour {
 		{
 			MenuManagerScript.mm.setGameOverMenu(true);
 		}
+		
 		if (gameObject.tag == "Enemy")
 		{
 			enemyNB--;
 			checkWin();
 		}
+		onDead.Invoke();
 		Destroy(gameObject);
 	}
 
