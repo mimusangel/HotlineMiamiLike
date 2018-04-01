@@ -6,6 +6,8 @@ public class VolumeHandler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("musicVolume");
+		AudioSource[] sources = GetComponents<AudioSource>();
+		foreach (AudioSource source in sources)
+			source.volume = PlayerPrefs.GetFloat("musicVolume");
 	}
 }
