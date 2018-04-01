@@ -20,12 +20,15 @@ public class DeathScript : MonoBehaviour {
 		Hp --;
 		if (Hp > 0)
 			return;
-		if (deathAudioSource && gameObject.tag == "Enemy")
+		if (deathAudioSource)
 		{
 			GameObject go = GameObject.Instantiate(deathAudioSource, transform.position, Quaternion.identity);
 			AudioSource audio = go.GetComponent<AudioSource>();
 			audio.clip = deathAudioList[Random.Range(0, deathAudioList.Length)];
-			audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+			if (gameObject.tag != "Enemy")
+				audio.volume = PlayerPrefs.GetFloat("soundsVolume") * 0.5f;
+			else
+				audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 			audio.Play();
 			Destroy(go, 1.0f);
 		}
