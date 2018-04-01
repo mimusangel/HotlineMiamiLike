@@ -32,11 +32,11 @@ public class WeaponScript : MonoBehaviour {
 	public int selectWeapon = -1;
 
 	private void Start() {
-		rb2d = GetComponent<Rigidbody2D>();
 		if (selectWeapon > -1)
 			WeaponRandomScript.instance.getWeapon(this,selectWeapon);
 		else
 			WeaponRandomScript.instance.randomWeapon(this);
+		rb2d = GetComponent<Rigidbody2D>();
 	}
 
 	// Update is called once per frame
@@ -78,7 +78,7 @@ public class WeaponScript : MonoBehaviour {
 			player = other.gameObject;
 		}
 		if (other.gameObject.tag == "Enemy") {
-			if (rb2d.velocity != Vector2.zero)
+			if (rb2d.velocity == Vector2.zero)
 				return;
 			if (weaponType == Type.Katana) {
 				// Tuer l'enemy

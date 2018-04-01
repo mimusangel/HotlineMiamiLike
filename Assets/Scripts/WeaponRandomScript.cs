@@ -33,6 +33,7 @@ public class WeaponRandomScript : MonoBehaviour {
 	}
 
 	public void getWeapon(WeaponScript ws, int id) {
+		
 		id = Mathf.Clamp(id, 0, weaponsName.Length - 1);
 		ws.weaponName = weaponsName[id];
 		ws.weaponSprite = weaponSprites [id];

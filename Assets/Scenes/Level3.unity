@@ -19950,6 +19950,11 @@ Prefab:
       propertyPath: m_Name
       value: 1-Uzi (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114515855717206102, guid: 675f0450ea40749bdafb97bab5c5e1b7,
+        type: 2}
+      propertyPath: selectWeapon
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 675f0450ea40749bdafb97bab5c5e1b7, type: 2}
   m_IsPrefabParent: 0
@@ -21811,34 +21816,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 4287016093895724, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4287016093895724, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1188498440117640, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
       propertyPath: m_Name
       value: Door (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4562781627598790, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4562781627598790, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 233621737923977658, guid: f259b9daba7ec46be96a9f0c0d7538f4,
-        type: 2}
-      propertyPath: m_ConnectedAnchor.y
-      value: 3.1499994
-      objectReference: {fileID: 0}
-    - target: {fileID: 4562781627598790, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
@@ -22989,7 +22969,7 @@ Prefab:
     - target: {fileID: 233621737923977658, guid: f259b9daba7ec46be96a9f0c0d7538f4,
         type: 2}
       propertyPath: m_ConnectedAnchor.y
-      value: 4
+      value: -0.14999941
       objectReference: {fileID: 0}
     - target: {fileID: 4562781627598790, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -22998,7 +22978,7 @@ Prefab:
     - target: {fileID: 233621737923977658, guid: f259b9daba7ec46be96a9f0c0d7538f4,
         type: 2}
       propertyPath: m_ConnectedAnchor.x
-      value: 8.85
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f259b9daba7ec46be96a9f0c0d7538f4, type: 2}
@@ -29031,7 +29011,7 @@ Prefab:
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 480
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
@@ -29051,7 +29031,7 @@ Prefab:
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 480
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}

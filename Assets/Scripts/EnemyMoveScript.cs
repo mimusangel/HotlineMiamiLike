@@ -53,6 +53,7 @@ public class EnemyMoveScript : MonoBehaviour {
 	WeaponScript weaponInventory = null;
 	public GameObject	bullet;
 	public GameObject	weaponSound;
+	public bool initWeapon = false;
 
 	void OnDrawGizmos() {
 		float lookDirection = (transform.eulerAngles.z - 90) * Mathf.Deg2Rad;
@@ -109,24 +110,26 @@ public class EnemyMoveScript : MonoBehaviour {
 
 		// Weapon
 		weaponInventory = GetComponent<WeaponScript>();
-		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
 
 		// Sprite Random
 		headRenderer.sprite = EnemyRandomScript.instance.getRandomHead();
 		bodyRenderer.sprite = EnemyRandomScript.instance.getRandomBody();
 
 		SetState(alertState);
-	}
-
-	void OnEnable() {
 		SoundAlerter.instance.OnSoundEvent += NoiseListener;
 	}
 
-	void OnDisable() {
+	private void OnDestroy() {
 		SoundAlerter.instance.OnSoundEvent -= NoiseListener;
 	}
 
 	void Update () {
+		if (!initWeapon)
+		{
+			WeaponRandomScript.instance.randomWeapon(weaponInventory);
+			weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+			initWeapon = true;
+		}
 		// if (Input.GetMouseButtonDown(1)) {
 		// 	Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		// 	NoiseListener(worldPos, 2.0f);
@@ -183,7 +186,7 @@ public class EnemyMoveScript : MonoBehaviour {
 		shootCooldown -= Time.deltaTime;
 		if (shootCooldown <= 0.0f) {
 			weaponShot(dir.normalized);
-			shootCooldown = 1.0f;
+			shootCooldown = weaponInventory.timeToShot;
 		}
 	}
 

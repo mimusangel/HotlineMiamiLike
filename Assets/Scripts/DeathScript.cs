@@ -7,13 +7,10 @@ public class DeathScript : MonoBehaviour {
 	public int Hp = 1;
 	public GameObject deathAudioSource;
 	public AudioClip[] deathAudioList;
-	static int	enemyNB = -1;
-	static GameObject	player;
+	public static GameObject	player;
 	public UnityEvent onDead;
 	
 	private void Start() {
-		if (enemyNB == -1)
-			enemyNB = GameObject.FindGameObjectsWithTag("Enemy").Length;
 		if (player == null && gameObject.tag == "Player")
 			player = gameObject;
 	}
@@ -39,20 +36,11 @@ public class DeathScript : MonoBehaviour {
 		
 		if (gameObject.tag == "Enemy")
 		{
-			enemyNB--;
-			checkWin();
+			DeathManager.instance.enemyNB--;
+			DeathManager.instance.checkWin();
 		}
 		onDead.Invoke();
 		Destroy(gameObject);
-	}
-
-	void checkWin()
-	{
-		if (enemyNB > 0)
-			return ;
-		MenuManagerScript.mm.setMissionCompleteMenu(true);
-		if (player)
-			Destroy(player);
 	}
 
 	public static void DestroyPlayer()

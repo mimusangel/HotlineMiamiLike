@@ -20,7 +20,9 @@ public class BulletScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject == origin || origin == null)
+		if (origin == null)
+			Destroy(gameObject);
+		if (coll.gameObject == origin)
 			return;
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<DeathScript>().Death();
@@ -33,6 +35,8 @@ public class BulletScript : MonoBehaviour {
 		if (type != WeaponScript.BulletType.Laser)
 			Destroy (gameObject);
 		else if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player")
+			Destroy (gameObject);
+		else if (coll.gameObject.tag == "Map")
 			Destroy (gameObject);
 	}
 

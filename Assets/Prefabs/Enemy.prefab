@@ -55,10 +55,10 @@ GameObject:
   - component: {fileID: 95076752688161738}
   - component: {fileID: 50607874501707900}
   - component: {fileID: 58683630433781738}
+  - component: {fileID: 114445285981582286}
   - component: {fileID: 114413253930230168}
   - component: {fileID: 82694364251409286}
   - component: {fileID: 114534140867417720}
-  - component: {fileID: 114445285981582286}
   m_Layer: 11
   m_Name: Enemy
   m_TagString: Enemy
@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f73185138a214dc4a51dfa5b598929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Hp: 1
   deathAudioSource: {fileID: 1365951117098308, guid: 28a679177eeed40e19a66b7e7a94b1a2,
     type: 2}
   deathAudioList:
@@ -368,6 +369,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8aed53bbcb68b4702a6d7e2e06ddf294, type: 3}
   - {fileID: 8300000, guid: c7ecc4a937cca491da8741b12f4522b3, type: 3}
   - {fileID: 8300000, guid: 61f34fee662fe406994204e8723ee10c, type: 3}
+  onDead:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!212 &212159539569628560
 SpriteRenderer:
   m_ObjectHideFlags: 1
