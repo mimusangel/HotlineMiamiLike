@@ -144,7 +144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432555692257428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.5, y: 9.5, z: 0}
+  m_LocalPosition: {x: -2.21, y: 3.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4471197260368298}
@@ -315,6 +315,7 @@ MonoBehaviour:
   patrolWaitingTime: 1
   patrolRandom: 0
   sightRadius: 7
+  senseRadius: 1.5
   sightAngle: 120
   alertedIcon: {fileID: 212276929334071596}
   headRenderer: {fileID: 212159539569628560}

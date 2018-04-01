@@ -23,7 +23,7 @@ public class PlayerMoveScript : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		weaponSlot.SetActive (false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		Vector2 dir = Vector2.zero;
@@ -110,13 +110,14 @@ public class PlayerMoveScript : MonoBehaviour {
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
 		bs.type = weaponInventory.bulletType;
 		// Sound
+		SoundAlerter.instance.CreateSoundAt(transform.position, weaponInventory.shotSoundRange);
 		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
 		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
 		audio.clip = weaponInventory.weaponShotSound;
 		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 		audio.Play();
 		Destroy(newBulletSound, 1.0f);
-		
+
 		// Remove Mun
 		weaponInventory.bulletNumber -= useMun;
 	}
