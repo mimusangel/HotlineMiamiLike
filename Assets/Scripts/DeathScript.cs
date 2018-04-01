@@ -20,7 +20,7 @@ public class DeathScript : MonoBehaviour {
 		Hp --;
 		if (Hp > 0)
 			return;
-		if (deathAudioSource)
+		if (deathAudioSource && gameObject.tag == "Enemy")
 		{
 			GameObject go = GameObject.Instantiate(deathAudioSource, transform.position, Quaternion.identity);
 			AudioSource audio = go.GetComponent<AudioSource>();
