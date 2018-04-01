@@ -97,7 +97,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4026887287942138}
   - component: {fileID: 114136204646247482}
-  - component: {fileID: 58883663700958884}
   - component: {fileID: 50424228860259610}
   - component: {fileID: 61329016607961884}
   - component: {fileID: 114316378762358482}
@@ -212,21 +211,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58883663700958884
-CircleCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1595901565199422}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 12.1
 --- !u!61 &61329016607961884
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -348,7 +332,7 @@ MonoBehaviour:
   movementSpeed: 180
   fireRate: 2
   bulletSpeed: 25
-  target: {fileID: 4379479667433884}
+  target: {fileID: 0}
   turret: {fileID: 4619786186532988}
   canonTip: {fileID: 4050952221822010}
   rocketPrefab: {fileID: 1885178431705906, guid: 3ca8fe946a8a94de08c7a66f6ee2eaa0,
@@ -374,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f73185138a214dc4a51dfa5b598929d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 30
+  Hp: 15
   deathAudioSource: {fileID: 1365951117098308, guid: 28a679177eeed40e19a66b7e7a94b1a2,
     type: 2}
   deathAudioList:

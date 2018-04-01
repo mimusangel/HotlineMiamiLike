@@ -126,17 +126,6 @@ public class Tank : MonoBehaviour {
 		Destroy(newBulletSound, 1.0f);
 		onFire.Invoke();
 		lastFireDelay = 0;
-	}
-
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
-			target = other.transform;
-		}
-	}
-
-	void OnTriggerExit2D(Collider2D other) {
-		if (other.gameObject.tag == "Player") {
-			target = null;
-		}
+		Debug.Log(GetComponent<DeathScript>().Hp);
 	}
 }

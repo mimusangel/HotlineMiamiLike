@@ -173,4 +173,23 @@ public class PlayerMoveScript : MonoBehaviour {
 	{
 		return (weaponInventory);
 	}
+
+	public void Fall() {
+		rb.constraints = RigidbodyConstraints2D.FreezeAll;
+		StartCoroutine(FallRoutine());
+	}
+
+	IEnumerator FallRoutine() {
+		for (int i = 0; i < 3; i++) {
+			transform.position = new Vector2(transform.position.x, transform.position.y + 0.2f);
+			transform.localScale = new Vector2(transform.localScale.x + 0.06f, transform.localScale.y + 0.06f);
+			yield return new WaitForSeconds(1.0f / 60.0f);
+		}
+		for (int i = 0; i < 16; i++) {
+			transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
+			transform.localScale = new Vector2(transform.localScale.x - 0.03f, transform.localScale.y - 0.03f);
+			yield return new WaitForSeconds(1.0f / 60.0f);
+		}
+		MenuManagerScript.mm.setMissionCompleteMenu(true);
+	}
 }
