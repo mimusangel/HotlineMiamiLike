@@ -20,9 +20,20 @@ public class WeaponRandomScript : MonoBehaviour {
 
 	public AudioClip[]			weaponShotSounds;
 
-	void Start () {
+	public static WeaponRandomScript	instance { get; private set; }
+
+	private void Awake() {
+		if (instance == null)
+			instance = this;
+	}
+
+	public void randomWeapon(WeaponScript ws) {
 		int id = Random.Range (0, weaponSprites.Length);
-		WeaponScript ws = GetComponent<WeaponScript> ();
+		getWeapon(ws, id);
+	}
+
+	public void getWeapon(WeaponScript ws, int id) {
+		id = Mathf.Clamp(id, 0, weaponsName.Length - 1);
 		ws.weaponName = weaponsName[id];
 		ws.weaponSprite = weaponSprites [id];
 		ws.weaponSlotSprite = weaponSlotSprites[id];
@@ -37,6 +48,6 @@ public class WeaponRandomScript : MonoBehaviour {
 		ws.shotSoundRange = shotSoundRanges[id];
 		ws.weaponFriction = weaponFrictions[id];
 		ws.bulletType = bulletTypes[id];
-		GetComponent<SpriteRenderer> ().sprite = weaponSprites [id];
+		ws.GetComponent<SpriteRenderer> ().sprite = weaponSprites [id];
 	}
 }

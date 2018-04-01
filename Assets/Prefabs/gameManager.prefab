@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1573179150156284}
+  m_IsPrefabParent: 1
+--- !u!1 &1573179150156284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4546432968742118}
+  - component: {fileID: 114939490846933668}
+  m_Layer: 0
+  m_Name: gameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4546432968742118
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573179150156284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114939490846933668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1573179150156284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26434010a2e2948999d2f96e33221e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponsName:
+  - Uzi
+  - Shotgun
+  - Magnum
+  - Rocket Launcher
+  - Katana
+  - Cricket
+  - Pistol
+  - Sub Machine Gun
+  - Machine Gun
+  - Energy Pistol
+  - Sniper
+  - Hadoken
+  weaponSprites:
+  - {fileID: 21300000, guid: 3a582ad63bf63437ca436507f3c5fbe8, type: 3}
+  - {fileID: 21300000, guid: b99032e6f1f9a49e5adb932489c76376, type: 3}
+  - {fileID: 21300000, guid: b3a7603c6d0094fde9abd4be77961bde, type: 3}
+  - {fileID: 21300000, guid: 8a622f5704cb14b10b0748976caad92c, type: 3}
+  - {fileID: 21300000, guid: f47402979bf234b2d8a7c4f680d637d0, type: 3}
+  - {fileID: 21300000, guid: 4896040e166334f77bce916ed5362b68, type: 3}
+  - {fileID: 21300000, guid: 8da9544e34ded44278465c6536fd852b, type: 3}
+  - {fileID: 21300000, guid: afebc235a4c8e420d8a46351da0a4b3f, type: 3}
+  - {fileID: 21300000, guid: f372e2dcfd0bf421e9dc0c446e65b1d0, type: 3}
+  - {fileID: 21300000, guid: f8b52bf803885439b97e16a867b6af83, type: 3}
+  - {fileID: 21300000, guid: d27f7bd0c8e074f57a690c6e9e6e1d3a, type: 3}
+  - {fileID: 21300000, guid: c20a163f10788422da8ba44d35fe4a39, type: 3}
+  weaponSlotSprites:
+  - {fileID: 21300000, guid: 43a139c7bee644f6f96d3ce30cc7cc15, type: 3}
+  - {fileID: 21300000, guid: 2775ead70e19f415884382d7d0911c04, type: 3}
+  - {fileID: 21300000, guid: 998863868c48d4acb8825638c9fe303c, type: 3}
+  - {fileID: 21300000, guid: e3140efe7137c48f8801a03d57bcc3d9, type: 3}
+  - {fileID: 21300000, guid: 6a80894c63238427280b822e403bcc63, type: 3}
+  - {fileID: 21300000, guid: 5e114d784ad9241b3b5c1072454ff4ef, type: 3}
+  - {fileID: 21300000, guid: 45311f9076bbc430e97a856761c1dec0, type: 3}
+  - {fileID: 21300000, guid: a315ebc2f13264de1ad811d9026e0221, type: 3}
+  - {fileID: 21300000, guid: 4bbcc50c9920a45f19aaf626e7a8c59c, type: 3}
+  - {fileID: 21300000, guid: 3581680fef4f648cc9d5fd17a09d9d6a, type: 3}
+  - {fileID: 21300000, guid: a6bb0ee89f1054bb7820664bbd8772a9, type: 3}
+  - {fileID: 21300000, guid: baaeab92311a94614a65b9c137e54777, type: 3}
+  bulletSprites:
+  - {fileID: 21300000, guid: 4b5fba961acb6452aaabf2a6f96856a1, type: 3}
+  - {fileID: 21300000, guid: baf659e9ad4e34fbdb3fb0dd0b7d4fb1, type: 3}
+  - {fileID: 21300000, guid: 8010373ff752c4a4b8a10ad4166b8ed7, type: 3}
+  - {fileID: 21300000, guid: 6e6cd268a39814164b43e97b0f7a3727, type: 3}
+  - {fileID: 21300000, guid: f1ca17da23b794eb48e841207ed79302, type: 3}
+  - {fileID: 21300000, guid: 0ae94501a054d4ee4afbb8e536f53a76, type: 3}
+  - {fileID: 21300000, guid: 4584cc037c60a488da1747a1bdc4eafd, type: 3}
+  - {fileID: 21300000, guid: 8decb5a550087491e961fbd84390cc8e, type: 3}
+  - {fileID: 21300000, guid: 4ed1bb74228404a5bbc1ab9d552593d7, type: 3}
+  - {fileID: 21300000, guid: f1a88cbf19a5c4119bdf4497d2a96fae, type: 3}
+  - {fileID: 21300000, guid: e965b9e9be6b84215a459a119303fd98, type: 3}
+  - {fileID: 21300000, guid: 3701e164151f34477a7f3cfc00fe0dfe, type: 3}
+  weaponsType: 000000000000000000000000000000000100000000000000000000000000000000000000000000000000000002000000
+  bulletNumbers: 280000000c0000000600000005000000000000000e000000100000002000000064000000140000000a00000000000000
+  timeToShots:
+  - 0.75
+  - 1
+  - 1
+  - 1.5
+  - 0.25
+  - 0.25
+  - 0.25
+  - 0.15
+  - 0.1
+  - 0.75
+  - 1.5
+  - 0.4
+  bulletUsedByShots: 030000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  bulletsSpeed:
+  - 10
+  - 8
+  - 10
+  - 7
+  - 0
+  - 11
+  - 8
+  - 10
+  - 10
+  - 12
+  - 14
+  - 6
+  bulletsLifeTime:
+  - 4
+  - 2
+  - 4
+  - 6
+  - 0.1
+  - 5
+  - 3
+  - 4
+  - 4
+  - 5
+  - 8
+  - 0.5
+  shotSoundRanges:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 1
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  - 1
+  weaponFrictions:
+  - 0.85
+  - 0.85
+  - 0.85
+  - 0.75
+  - 0.9
+  - 0.85
+  - 0.85
+  - 0.8
+  - 0.8
+  - 0.85
+  - 0.85
+  - 0.85
+  bulletTypes: 000000000300000000000000020000000000000001000000000000000000000000000000010000000000000000000000
+  weaponShotSounds:
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: 8a7150a27201b41f4a7bbd616c8a042b, type: 3}
+  - {fileID: 8300000, guid: f1a817d0c36714d52b4d0b9134052a31, type: 3}
+  - {fileID: 8300000, guid: d27266dbeb98e4717a95f991054745c7, type: 3}
+  - {fileID: 8300000, guid: 48d68d12751aa44cb87bfa4f2ca98bb6, type: 3}
+  - {fileID: 8300000, guid: 41ba8b787dda34228adbcfeae0635a4c, type: 3}
+  - {fileID: 8300000, guid: f1a817d0c36714d52b4d0b9134052a31, type: 3}
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: 2a66bd67ce9c148d9948c5b4a1e85970, type: 3}
+  - {fileID: 8300000, guid: a634b485d3ffc44c7b52cab228a8ce8e, type: 3}
+  - {fileID: 8300000, guid: 7db6db13cd0db47f8a7ec51faf507fe1, type: 3}
+  - {fileID: 8300000, guid: bc2f9fa344b7e4fc4980b4e30e33cb08, type: 3}
