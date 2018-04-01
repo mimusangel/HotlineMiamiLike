@@ -9,6 +9,7 @@ public class EnemyMoveScript : MonoBehaviour {
 	public float patrolWaitingTime;
 	public bool patrolRandom;
 	public float sightRadius;
+	public float senseRadius;
 	public float sightAngle;
 	public SpriteRenderer alertedIcon;
 	public SpriteRenderer headRenderer;
@@ -74,6 +75,8 @@ public class EnemyMoveScript : MonoBehaviour {
 			farPointRight.y += Mathf.Sin(lookDirection + (i + 0.1f) * Mathf.Deg2Rad * sightAngle) * sightRadius;
 			Gizmos.DrawLine(farPointLeft, farPointRight);
 		}
+
+		Gizmos.DrawWireSphere(transform.position, senseRadius);
 	}
 
 	// Use this for initialization
@@ -115,11 +118,19 @@ public class EnemyMoveScript : MonoBehaviour {
 		SetState(alertState);
 	}
 
+	void OnEnable() {
+		SoundAlerter.instance.OnSoundEvent += NoiseListener;
+	}
+
+	void OnDisable() {
+		SoundAlerter.instance.OnSoundEvent -= NoiseListener;
+	}
+
 	void Update () {
-		if (Input.GetMouseButtonDown(1)) {
-			Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			NoiseListener(worldPos, 2.0f);
-		}
+		// if (Input.GetMouseButtonDown(1)) {
+		// 	Vector2 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		// 	NoiseListener(worldPos, 2.0f);
+		// }
 		alertedIcon.transform.position = transform.position + new Vector3(0, 1, 0);
 		alertedIcon.transform.rotation = Quaternion.identity;
 		if (stunned) {
@@ -172,9 +183,8 @@ public class EnemyMoveScript : MonoBehaviour {
 		transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 		shootCooldown -= Time.deltaTime;
 		if (shootCooldown <= 0.0f) {
-			// TODO: shoot
 			weaponShot(dir.normalized);
-			shootCooldown = 1.0f;
+			shootCooldown = weaponInventory.timeToShot;
 		}
 	}
 
@@ -256,8 +266,10 @@ public class EnemyMoveScript : MonoBehaviour {
 		farPoint.x += Mathf.Cos(lookDirection);
 		farPoint.y += Mathf.Sin(lookDirection);
 		float angle = Vector2.Angle(selfPos - farPoint, selfPos - position);
-		if (angle > sightAngle / 2)
-			return false;
+		if (angle > sightAngle / 2) {
+			if (Vector2.Distance(selfPos, position) > senseRadius)
+				return false;
+		}
 		Vector2 direction = position - selfPos;
 		RaycastHit2D[] hits = Physics2D.RaycastAll(selfPos, direction.normalized, direction.magnitude);
 		foreach (RaycastHit2D hit in hits) {
@@ -319,6 +331,7 @@ public class EnemyMoveScript : MonoBehaviour {
 		bs.setLifeTime(weaponInventory.bulletLifeTime);
 		bs.type = weaponInventory.bulletType;
 		// Sound
+		SoundAlerter.instance.CreateSoundAt(transform.position, weaponInventory.shotSoundRange);
 		GameObject newBulletSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
 		AudioSource audio = newBulletSound.GetComponent<AudioSource>();
 		audio.clip = weaponInventory.weaponShotSound;
