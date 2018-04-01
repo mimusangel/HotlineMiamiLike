@@ -23,8 +23,6 @@ public class Stairs : MonoBehaviour {
 			PlayerPrefs.SetString("lastLoadedScene", SceneManager.GetActiveScene().name);
 			DeathScript.DestroyPlayer();
 			onExit.Invoke();
-			// MenuManagerScript.mm.setMissionCompleteMenu(true);
-			// SceneManager.LoadScene(linkedScene);
 		}
 	}
 
