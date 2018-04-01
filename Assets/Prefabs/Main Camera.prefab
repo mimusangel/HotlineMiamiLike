@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4d2a724e697457ea7270be70779e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorIcon: {fileID: 0}
+  cursorIcon: {fileID: 2800000, guid: ac9305ea714ca4c1ea1b0dda620c09f9, type: 3}
   follow: {fileID: 0}
 --- !u!124 &124520212384867098
 Behaviour:
