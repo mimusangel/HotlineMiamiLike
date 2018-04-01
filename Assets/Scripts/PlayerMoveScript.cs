@@ -7,6 +7,7 @@ public class PlayerMoveScript : MonoBehaviour {
 	public AudioSource weaponNoBulletAudioSource;
 	public GameObject weaponSlot;
 	public GameObject weaponSound;
+	public AudioClip pickupSound;
 	public float speed = 5.0f;
 
 	Rigidbody2D rb;
@@ -15,6 +16,8 @@ public class PlayerMoveScript : MonoBehaviour {
 	WeaponScript weaponInventory = null;
 	public GameObject	bullet;
 	float fireWait = 0.0f;
+
+	float dash = 0.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -36,8 +39,13 @@ public class PlayerMoveScript : MonoBehaviour {
 		if (Input.GetKey (KeyCode.D))
 			dir += Vector2.right;
 		if (dir != Vector2.zero) {
+			dash *= 0.9f;
+			if (dash < 0.1f)
+				dash = 0.0f;
+			if (Input.GetKeyDown(KeyCode.Space) && dash <= 0.0f)
+				dash = speed * 3;
 			dir.Normalize ();
-			rb.velocity = dir * speed;
+			rb.velocity = dir * (speed + dash);
 			anim.SetBool ("run", true);
 		} else {
 			rb.velocity = Vector2.zero;
@@ -60,15 +68,15 @@ public class PlayerMoveScript : MonoBehaviour {
 				if (weaponInventory.weaponType == WeaponScript.Type.Dist) {
 					if (weaponInventory.bulletUsedByShot > 1)
 							StartCoroutine(weaponShotRate(lookDir));
-						else
+					else
+					{
+						if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
 						{
-							if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
-							{
-								weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * lookDir, 0);
-								weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * lookDir, 0);
-							}
-							weaponShot(lookDir, 1);
+							weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * lookDir, 0);
+							weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * lookDir, 0);
 						}
+						weaponShot(lookDir, 1);
+					}
 				} else {
 					weaponShot(lookDir, 0);
 				}
@@ -129,6 +137,18 @@ public class PlayerMoveScript : MonoBehaviour {
 		weaponInventory.gameObject.SetActive (false);
 		weaponSlot.SetActive (true);
 		weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
+		// Sound
+		playSound(pickupSound);
+	}
+
+	public void	playSound(AudioClip clip, float deathTime = 1.0f) 
+	{
+		GameObject newSound = GameObject.Instantiate(weaponSound, transform.position, transform.rotation);
+		AudioSource audio = newSound.GetComponent<AudioSource>();
+		audio.clip = clip;
+		audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+		audio.Play();
+		Destroy(newSound, deathTime);
 	}
 
 	public void changeWeapon(WeaponScript weapon)

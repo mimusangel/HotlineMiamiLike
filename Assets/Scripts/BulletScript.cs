@@ -22,10 +22,10 @@ public class BulletScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (origin == null) {
 			Destroy(gameObject);
-		}
-		if (coll.gameObject == origin) {
+		if (coll == null || coll.gameObject == null || coll.gameObject == origin)
 			return;
-		}
+		if (coll.gameObject.tag == "Enemy" && origin.tag == "Enemy")
+			return ;
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<DeathScript>().Death();
 		}

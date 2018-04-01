@@ -26,13 +26,17 @@ public class DeathScript : MonoBehaviour {
 			GameObject go = GameObject.Instantiate(deathAudioSource, transform.position, Quaternion.identity);
 			AudioSource audio = go.GetComponent<AudioSource>();
 			audio.clip = deathAudioList[Random.Range(0, deathAudioList.Length)];
-			audio.volume = PlayerPrefs.GetFloat("soundsVolume");
+			if (gameObject.tag != "Enemy")
+				audio.volume = PlayerPrefs.GetFloat("soundsVolume") * 0.5f;
+			else
+				audio.volume = PlayerPrefs.GetFloat("soundsVolume");
 			audio.Play();
 			Destroy(go, 1.0f);
 		}
 		if (gameObject.tag == "Player")
 		{
 			MenuManagerScript.mm.setGameOverMenu(true);
+			DeathManager.instance.lose();
 		}
 		
 		if (gameObject.tag == "Enemy")
@@ -47,5 +51,10 @@ public class DeathScript : MonoBehaviour {
 	public static void DestroyPlayer()
 	{
 		Destroy(player);
+	}
+
+	public static void playSound(AudioClip clip, float deathTime = 1.0f)
+	{
+		player.GetComponent<PlayerMoveScript>().playSound(clip, deathTime);
 	}
 }

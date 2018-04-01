@@ -55,6 +55,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyNB: -1
+  winSound: {fileID: 8300000, guid: 3f823d776f2224f7eaa3e3ad6976db1b, type: 3}
+  loseSound: {fileID: 8300000, guid: 7faccf86862cc43bb9a5589bbb6c955f, type: 3}
 --- !u!114 &114701163620309794
 MonoBehaviour:
   m_ObjectHideFlags: 1

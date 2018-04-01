@@ -67,11 +67,13 @@ public class buttonScript : MonoBehaviour {
 
 	public void backToMenu()
 	{
+		Time.timeScale = 1.0f;
 		SceneManager.LoadScene("Scenes/MainMenu");
 	}
 
 	public void restart()
 	{
+		Time.timeScale = 1.0f;
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }
