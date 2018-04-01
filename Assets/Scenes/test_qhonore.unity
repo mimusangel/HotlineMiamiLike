@@ -323,31 +323,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9308dc44653ff4d349538b3fa3344131, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &363018529 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1003045320137560, guid: 9308dc44653ff4d349538b3fa3344131,
-    type: 2}
-  m_PrefabInternal: {fileID: 745185431}
---- !u!50 &363018530
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 363018529}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1001 &442899487
 Prefab:
   m_ObjectHideFlags: 0
@@ -587,11 +562,6 @@ Prefab:
     - target: {fileID: 1003045320137560, guid: 9308dc44653ff4d349538b3fa3344131, type: 2}
       propertyPath: m_Name
       value: windowBreakable (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 61757879456712602, guid: 9308dc44653ff4d349538b3fa3344131,
-        type: 2}
-      propertyPath: m_IsTrigger
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9308dc44653ff4d349538b3fa3344131, type: 2}
@@ -909,10 +879,6 @@ Prefab:
       propertyPath: m_Name
       value: windowBreakable (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 4356313650316572, guid: 9308dc44653ff4d349538b3fa3344131, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9308dc44653ff4d349538b3fa3344131, type: 2}
   m_IsPrefabParent: 0
@@ -1119,7 +1085,7 @@ Prefab:
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -39.95
       objectReference: {fileID: 0}
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
@@ -1139,7 +1105,7 @@ Prefab:
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -119.850006
       objectReference: {fileID: 0}
     - target: {fileID: 114957010879020758, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
