@@ -126,7 +126,10 @@ public class EnemyMoveScript : MonoBehaviour {
 	void Update () {
 		if (!initWeapon)
 		{
-			WeaponRandomScript.instance.randomWeapon(weaponInventory);
+			if (weaponInventory.selectWeapon > -1)
+				WeaponRandomScript.instance.getWeapon(weaponInventory, weaponInventory.selectWeapon);
+			else
+				WeaponRandomScript.instance.randomWeapon(weaponInventory);
 			weaponSlot.GetComponent<SpriteRenderer> ().sprite = weaponInventory.weaponSlotSprite;
 			initWeapon = true;
 		}
