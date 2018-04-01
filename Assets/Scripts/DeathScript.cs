@@ -17,6 +17,7 @@ public class DeathScript : MonoBehaviour {
 
 	public void Death()
 	{
+		Debug.Log(gameObject.name);
 		Hp --;
 		if (Hp > 0)
 			return;

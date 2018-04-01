@@ -20,18 +20,21 @@ public class BulletScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (origin == null)
+		if (origin == null) {
 			Destroy(gameObject);
-		if (coll.gameObject == origin)
+		}
+		if (coll.gameObject == origin) {
 			return;
+		}
 		if (coll.gameObject.tag == "Enemy") {
 			coll.gameObject.GetComponent<DeathScript>().Death();
 		}
 		if (coll.gameObject.tag == "Player") {
 			coll.gameObject.GetComponent<DeathScript>().Death();
 		}
-		if (type == WeaponScript.BulletType.Explode)
+		if (type == WeaponScript.BulletType.Explode) {
 			GameObject.Instantiate(explode, transform.position, transform.rotation);
+		}
 		if (type != WeaponScript.BulletType.Laser)
 			Destroy (gameObject);
 		else if (coll.gameObject.tag != "Enemy" && coll.gameObject.tag != "Player")

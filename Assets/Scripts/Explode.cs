@@ -37,6 +37,7 @@ public class Explode : MonoBehaviour {
 		{
 			if (testHit(other.gameObject))
 			{
+				Debug.Log("kill " + other.gameObject.name);
 				other.gameObject.GetComponent<DeathScript>().Death();
 			}
 		}
@@ -52,14 +53,14 @@ public class Explode : MonoBehaviour {
 
 	bool testHit(GameObject other)
 	{
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, (other.transform.position - transform.position).normalized);
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, (other.transform.position - transform.position).normalized, GetComponent<CircleCollider2D>().radius);
 		if (hit.collider != null)
 		{
 			if (hit.collider.gameObject.tag == "Player" && hit.collider.gameObject.tag == "Enemy")
 			{
-				return (false);
+				return (true);
 			}
 		}
-		return (true);
+		return (false);
 	}
 }
