@@ -60,15 +60,15 @@ public class PlayerMoveScript : MonoBehaviour {
 				if (weaponInventory.weaponType == WeaponScript.Type.Dist) {
 					if (weaponInventory.bulletUsedByShot > 1)
 							StartCoroutine(weaponShotRate(lookDir));
-						else
+					else
+					{
+						if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
 						{
-							if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
-							{
-								weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * lookDir, 0);
-								weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * lookDir, 0);
-							}
-							weaponShot(lookDir, 1);
+							weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * lookDir, 0);
+							weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * lookDir, 0);
 						}
+						weaponShot(lookDir, 1);
+					}
 				} else {
 					weaponShot(lookDir, 0);
 				}

@@ -188,7 +188,17 @@ public class EnemyMoveScript : MonoBehaviour {
 		transform.eulerAngles = new Vector3(0, 0, 90 + Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 		shootCooldown -= Time.deltaTime;
 		if (shootCooldown <= 0.0f) {
-			weaponShot(dir.normalized);
+			if (weaponInventory.bulletUsedByShot > 1)
+				StartCoroutine(weaponShotRate(dir.normalized));
+			else
+			{
+				if (weaponInventory.bulletType == WeaponScript.BulletType.Fragment)
+				{
+					weaponShot(Quaternion.AngleAxis(15.0f, Vector3.forward) * dir.normalized);
+					weaponShot(Quaternion.AngleAxis(-15.0f, Vector3.forward) * dir.normalized);
+				}
+				weaponShot(dir.normalized);
+			}
 			shootCooldown = weaponInventory.timeToShot;
 		}
 	}
@@ -318,6 +328,16 @@ public class EnemyMoveScript : MonoBehaviour {
 			yield return new WaitForSeconds(0.025f);
 		}
 		alertedIcon.transform.localScale = new Vector3(0, 0, 1);
+	}
+
+	IEnumerator weaponShotRate(Vector2 lookDir)
+	{
+		for (int i = 0; i < weaponInventory.bulletUsedByShot; i++)
+		{
+			if (weaponInventory)
+				weaponShot(lookDir);
+			yield return new WaitForSeconds(0.1f);
+		}
 	}
 
 	private void weaponShot(Vector2 lookDir)
