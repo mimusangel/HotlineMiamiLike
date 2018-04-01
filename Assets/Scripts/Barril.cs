@@ -25,7 +25,11 @@ public class Barril : MonoBehaviour {
 			Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 			foreach (Collider2D collision in collisions) {
 				if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy") {
-					collision.GetComponent<DeathScript>().Death();
+					var hits = Physics2D.RaycastAll(transform.position, collision.transform.position - transform.position, explosionRadius);
+					if (hits.Length < 2)
+						continue;
+					if (hits[1].collider.gameObject.tag == "Player" || hits[1].collider.gameObject.tag == "Enemy")
+						collision.GetComponent<DeathScript>().Death();
 				}
 			}
 		}
