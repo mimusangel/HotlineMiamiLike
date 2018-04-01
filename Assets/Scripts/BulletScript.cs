@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (origin == null) {
+		if (origin == null)
 			Destroy(gameObject);
 		if (coll == null || coll.gameObject == null || coll.gameObject == origin)
 			return;
