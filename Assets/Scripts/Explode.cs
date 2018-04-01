@@ -25,7 +25,7 @@ public class Explode : MonoBehaviour {
 			Destroy(gameObject);
 	}
 
-	private void OnTriggerStay2D(Collider2D other) {
+	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.gameObject.tag == "Player")
 		{
 			if (testHit(other.gameObject))
@@ -33,11 +33,12 @@ public class Explode : MonoBehaviour {
 				other.gameObject.GetComponent<DeathScript>().Death();
 			}
 		}
-		else if (other.gameObject.tag == "Enemy")
+		else if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Tank")
 		{
+			Debug.Log("hit");
 			if (testHit(other.gameObject))
 			{
-				Debug.Log("kill " + other.gameObject.name);
+				Debug.Log("hit after");
 				other.gameObject.GetComponent<DeathScript>().Death();
 			}
 		}
@@ -53,10 +54,15 @@ public class Explode : MonoBehaviour {
 
 	bool testHit(GameObject other)
 	{
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, (other.transform.position - transform.position).normalized, GetComponent<CircleCollider2D>().radius);
-		if (hit.collider != null)
+		RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, (other.transform.position - transform.position).normalized, GetComponent<CircleCollider2D>().radius + 3);
+		Debug.Log("testHit");
+		if (hits.Length > 1)
+		if (hits[1].collider != null)
 		{
-			if (hit.collider.gameObject.tag == "Player" && hit.collider.gameObject.tag == "Enemy")
+			Debug.Log("got hits[1]");
+			Debug.Log(hits[1].collider.gameObject.tag);
+			Debug.Log(hits[1].collider.gameObject.name);
+			if (hits[1].collider.gameObject.tag == "Player" || hits[1].collider.gameObject.tag == "Enemy" || hits[1].collider.gameObject.tag == "Tank")
 			{
 				return (true);
 			}

@@ -88,7 +88,9 @@ public class WeaponScript : MonoBehaviour {
 			else
 			{
 				// Etourdir l'enemy
-				other.gameObject.GetComponent<EnemyMoveScript>().SetStunned(true, 2.0f);
+				var enemyScript = other.gameObject.GetComponent<EnemyMoveScript>();
+				if (enemyScript)
+					enemyScript.SetStunned(true, 2.0f);
 			}
 		}
 	}

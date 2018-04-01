@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Map
+  - Tank
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - StaticMap
   - Entity
   - Weapon
-  - 
+  - Tank
   - 
   - 
   - 
