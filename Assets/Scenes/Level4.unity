@@ -1676,7 +1676,7 @@ Prefab:
     - target: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
         type: 2}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
         type: 2}
@@ -1687,26 +1687,25 @@ Prefab:
         type: 2}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 61407492}
+      objectReference: {fileID: 342842065}
     - target: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
         type: 2}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadRelatedLevel
+      value: setMissionCompleteMenu
       objectReference: {fileID: 0}
     - target: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
         type: 2}
       propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
+        type: 2}
+      propertyPath: onExit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7066c1d621e24521889ae2734d01388, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &61407492 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114554474779011284, guid: c7066c1d621e24521889ae2734d01388,
-    type: 2}
-  m_PrefabInternal: {fileID: 61407491}
-  m_Script: {fileID: 11500000, guid: d3a3ff8cd5f4f4cec83a8ea5c299f946, type: 3}
 --- !u!1001 &66497839
 Prefab:
   m_ObjectHideFlags: 0
@@ -9171,6 +9170,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15cae0a4c138942c4b1f288c5833d086, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &342842065 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114938036846701386, guid: f585c4f96a4544223a28d6da23fa66b3,
+    type: 2}
+  m_PrefabInternal: {fileID: 699355547}
+  m_Script: {fileID: 11500000, guid: 8c7c9d3189f8b472e942c00be7768c1a, type: 3}
 --- !u!1001 &343425511
 Prefab:
   m_ObjectHideFlags: 0
