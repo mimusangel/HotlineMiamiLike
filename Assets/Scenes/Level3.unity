@@ -24046,7 +24046,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.5, y: -2}
@@ -28203,7 +28203,7 @@ Prefab:
     - target: {fileID: 224112057101980972, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -54
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
@@ -28223,7 +28223,7 @@ Prefab:
     - target: {fileID: 224022619545876750, guid: f585c4f96a4544223a28d6da23fa66b3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -162
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f585c4f96a4544223a28d6da23fa66b3, type: 2}
