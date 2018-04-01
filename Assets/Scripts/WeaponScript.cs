@@ -19,7 +19,7 @@ public class WeaponScript : MonoBehaviour {
 	public float	shotSoundRange = 5.0f;
 	public float 	weaponFriction = 0.8f; 
 	public BulletType bulletType = BulletType.Base;
-
+	
 	public AudioClip	weaponShotSound;
 
 	GameObject player;
@@ -29,8 +29,14 @@ public class WeaponScript : MonoBehaviour {
 	float	rotate = 0.0f;
 	float	rotateSpeed;
 
+	public int selectWeapon = -1;
+
 	private void Start() {
 		rb2d = GetComponent<Rigidbody2D>();
+		if (selectWeapon > -1)
+			WeaponRandomScript.instance.getWeapon(this,selectWeapon);
+		else
+			WeaponRandomScript.instance.randomWeapon(this);
 	}
 
 	// Update is called once per frame
